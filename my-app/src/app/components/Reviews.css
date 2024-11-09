@@ -1,0 +1,11 @@
+.reviews-container {
+    display: grid; /* Enables grid layout */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns, each taking equal space */
+    gap: 100px; /* Adds space between images */
+    padding: 10px; /* Optional: Adds padding around the container */
+}
+
+.review-center {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+}

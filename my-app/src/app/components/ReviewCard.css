@@ -1,0 +1,58 @@
+/* img {
+    width: 230px;
+} */
+
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background-color: rgba(34, 34, 34, 0.596);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor:pointer;
+}
+
+.review-container:hover{
+    background-color:  rgb(175, 36, 126);
+}
+
+.review-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.review-author {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.stars {
+    font-size: 1.5rem;
+    color: gold;
+    margin-bottom: 5px;
+}
+
+.book-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.book-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.book-author {
+    font-size: 1rem;
+    color: #ffffff;
+}
