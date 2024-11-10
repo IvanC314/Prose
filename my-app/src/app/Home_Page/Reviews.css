@@ -1,0 +1,11 @@
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px 100px; 
+    padding: 50px 100px; 
+}
+
+.review-center {
+    display: flex;
+    justify-content: center; 
+}

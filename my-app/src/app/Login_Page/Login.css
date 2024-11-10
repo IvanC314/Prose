@@ -1,0 +1,62 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background-color: rgba(34, 34, 34, 0.849);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    width: 35%; 
+    height: auto; 
+    margin: 0 auto; 
+    position: relative;
+    padding: 20px; 
+
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.title-login{
+    font-size:7rem;
+    padding: 0px;
+    margin: 0px;
+}
+
+.text {
+    font-size:1rem;
+}
+
+.textboxLabel {
+    font-size: 1.6rem;
+    color: #ffffff; 
+    text-align: left;
+    display: block;
+}
+
+.textbox {
+    width: 80%; 
+    height: 5%;
+    padding: 10px; 
+    font-size: 1rem;
+    border: 3px solid #ffffff; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    outline: none; 
+    transition: border-color 0.3s, box-shadow 0.3s; 
+    color: black;
+}
+
+.textbox:focus {
+    border-color: rgb(211, 44, 152); 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add glowing effect */
+    color: black;
+}
+
+.textbox:placeholder {
+    color: #000000;
+}

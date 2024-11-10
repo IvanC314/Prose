@@ -1,8 +1,7 @@
 /* CONSISTS OF DROPDOWN MENU, PROSE TITLE, LOGIN, REGISTER ON HOME PAGE */
 
 import './Header.css';
-import Login from './Login';
-import Register from './Register';
+import Button from './Button';
 import {IM_Fell_English_SC} from 'next/font/google';
 import GenreButton from './GenreButton';
 
@@ -22,8 +21,8 @@ export default function Header()
             </div>
 
             <div>
-                <Login/>
-                <Register/>
+                <Button text="Login" targetPage='../Login_Page'/>
+                <Button text="Register" targetPage='../Register_Page'/>
             </div>
         </header>
     );

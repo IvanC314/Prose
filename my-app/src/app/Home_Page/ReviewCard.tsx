@@ -10,9 +10,9 @@ function ReviewCard()
 {
     return (
         <div className='review-container'>
+            <p  className='stars'>⭐⭐⭐⭐⭐</p>
             <p className='review-title'>Review title</p>
             <p className='review-author'>Review Author</p>
-            <p  className='stars'>⭐⭐⭐⭐⭐</p>
             <img src={testHarry.src}  className='book-image'></img>
             <p className='book-title'>Book Title</p>
             <p className='book-author'>Book Author</p>
@@ -24,9 +24,9 @@ function ReviewCard2()
 {
     return (
         <div className='review-container'>
+            <p  className='stars'>⭐⭐⭐⭐⭐</p>
             <p className='review-title'>Review title</p>
             <p className='review-author'>Review Author</p>
-            <p  className='stars'>⭐⭐⭐⭐⭐</p>
             <img src={testAnimal.src}  className='book-image'></img>
             <p className='book-title'>Book Title</p>
             <p className='book-author'>Book Author</p>
@@ -38,9 +38,9 @@ function ReviewCard3()
 {
     return (
         <div className='review-container'>
+            <p  className='stars'>⭐⭐⭐⭐⭐</p>
             <p className='review-title'>Review title</p>
             <p className='review-author'>Review Author</p>
-            <p  className='stars'>⭐⭐⭐⭐⭐</p>
             <img src={testBook.src}  className='book-image'></img>
             <p className='book-title'>Book Title</p>
             <p className='book-author'>Book Author</p>
