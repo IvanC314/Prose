@@ -23,7 +23,7 @@ export default function Login()
             <label htmlFor="password" className="textboxLabel">Password:</label>
             <input type="password" id="password" className="textbox" placeholder="Type..." />            
             <p className='text'>Forgot your password?</p>
-            <Button text="Sign In" targetPage='../'/>
+            <Button text="Sign In" targetPage='../Authenticated_Home_Page'/>
             <Button text="Create an Account" targetPage='../Register_Page'/>
         </div>
     );
