@@ -38,7 +38,7 @@ export default function Register()
             <label htmlFor="password" className="textboxLabel">Confirm Password</label>
             <input type="password" id="password" className="textbox" placeholder="Type..." />   
                 
-            <Button text="Create an Account" targetPage='../'/>
+            <Button text="Create an Account" targetPage='../Auth_Home_Page'/>
         </div>
     );
 };

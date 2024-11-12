@@ -1,3 +1,39 @@
+.featured-reviews-header {
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: whitesmoke;
+    margin-top: -45px;
+    margin-bottom: 10px; 
+    text-align: center;   
+    width: 100%;  
+}
+
+.review-center {
+    display: flex;
+    flex-direction: column;  
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.reviews-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;  
+    justify-items: center;
+}
+
+.review-container {
+    background: whitesmoke;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/*OLD
 .reviews-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
@@ -9,3 +45,4 @@
     display: flex;
     justify-content: center; 
 }
+    */

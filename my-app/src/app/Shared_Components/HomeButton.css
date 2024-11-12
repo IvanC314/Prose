@@ -1,0 +1,10 @@
+.home-button {
+    color:white;
+    cursor: pointer; 
+    height: 3.5rem;
+    width: 3.5rem;
+}
+
+.home-button:hover {
+    color:rgb(238, 110, 193);
+}

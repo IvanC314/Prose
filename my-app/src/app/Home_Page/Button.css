@@ -12,6 +12,7 @@
     text-decoration: none; 
     cursor: pointer; 
     transition: background-color 0.3s ease;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
 }
 
 .pink-button:hover {
