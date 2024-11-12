@@ -10,7 +10,7 @@ const reviews = [
     {
         stars: '⭐⭐⭐⭐⭐',
         reviewTitle: 'Amazing Book!',
-        reviewAuthor: 'John Doe',
+        reviewAuthor: 'johndoe13',
         bookImage: testHarry.src,
         bookTitle: 'Harry Potter',
         bookAuthor: 'J.K. Rowling',
@@ -18,15 +18,15 @@ const reviews = [
     {
         stars: '⭐⭐⭐⭐',
         reviewTitle: 'Thought-provoking',
-        reviewAuthor: 'Jane Smith',
+        reviewAuthor: 'janesmith101',
         bookImage: testAnimal.src,
         bookTitle: 'Animal Farm',
         bookAuthor: 'George Orwell',
     },
     {
         stars: '⭐',
-        reviewTitle: 'Absolute Dogwater',
-        reviewAuthor: 'Jack Daniel',
+        reviewTitle: 'Absolute Dog-water',
+        reviewAuthor: 'thejackdaniel',
         bookImage: testAA.src,
         bookTitle: 'Alcoholics Anonymous',
         bookAuthor: 'Bill W.',
@@ -36,12 +36,15 @@ const reviews = [
 export default function Reviews() {
     return (
         <div className='review-center'>
+            <h2 className="featured-reviews-header">Featured Reviews</h2>
+
             <div className='reviews-container'>
+            
                 {reviews.map((review, index) => (
                     <ReviewCard
                         key={index}
                         stars={review.stars}
-                        reviewTitle={review.reviewTitle}
+                        reviewTitle={review.reviewTitle}                        
                         reviewAuthor={review.reviewAuthor}
                         bookImage={review.bookImage}
                         bookTitle={review.bookTitle}
