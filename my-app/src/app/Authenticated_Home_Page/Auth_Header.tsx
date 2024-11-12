@@ -23,6 +23,7 @@ export default function Auth_Header()
             <div>
                 <Button text="Write Review" targetPage='../Login_Page'/>
                 <Button text="Profile" targetPage='../Register_Page'/>
+                <Button text="Logout" targetPage='../Register_Page'/>
             </div>
         </header>
     );
