@@ -1,10 +1,7 @@
 /* BODY THAT CONTAINS ALL THE REVIEW CARDS */
 
 import './Reviews.css';
-import ReviewCard from './ReviewCard';
-import testHarry from '../images/testHarry.jpg';
-import testAnimal from '../images/testAnimal.jpg';
-import testAA from '../images/testAA.jpg';
+import {ReviewCard, ReviewCard2, ReviewCard3} from './ReviewCard';
 
 const reviews = [
     {
@@ -33,7 +30,8 @@ const reviews = [
     },
 ];
 
-export default function Reviews() {
+export default function Reviews() 
+{
     return (
         <div className='review-center'>
             <h2 className="featured-reviews-header">Featured Reviews</h2>
@@ -54,4 +52,4 @@ export default function Reviews() {
             </div>
         </div>
     );
-}
+};
