@@ -2,13 +2,17 @@
 
 import './ReviewCard.css';
 import Image from 'next/image';
-import testHarry from '../images/testHarry.jpg'
-import testAnimal from '../images/testAnimal.jpg'
-import testBook from '../images/book.jpg'
 
+interface ReviewCardProps {
+    stars: string;
+    reviewTitle: string;
+    reviewAuthor: string;
+    bookImage: string;
+    bookTitle: string;
+    bookAuthor: string;
+}
 
-function ReviewCard() 
-{
+export default function ReviewCard({ stars, reviewTitle, reviewAuthor, bookImage, bookTitle, bookAuthor }: ReviewCardProps) {
     return (
         <div className='review-container'>
             <p className='stars'>{stars}</p>
@@ -20,3 +24,6 @@ function ReviewCard()
         </div>
     );
 }
+
+/*            <img src={bookImage} className='book-image' alt={bookTitle} />
+*/

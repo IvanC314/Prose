@@ -22,8 +22,7 @@ body {
     /* Dark wood background */
     background-image: url('./images/DarkWood.jpg');
     background-size: 100% auto; 
-    background-repeat: repeat-y; 
-    background-attachment: fixed;
+    background-repeat: no-repeat; 
 
 }
 

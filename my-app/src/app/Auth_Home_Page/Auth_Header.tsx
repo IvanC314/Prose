@@ -21,9 +21,8 @@ export default function Auth_Header()
             </div>
 
             <div>
-                <Button text="Write Review" targetPage='../Login_Page'/>
-                <Button text="Profile" targetPage='../Register_Page'/>
-                <Button text="Logout" targetPage='../Register_Page'/>
+                <Button text="Write Review" targetPage='../Write_Review_Page'/>
+                <Button text="Logout" targetPage='../'/>
             </div>
         </header>
     );
