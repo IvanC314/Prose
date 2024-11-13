@@ -1,6 +1,7 @@
 /* INDIVIDUAL REVIEW CARDS THAT SHOW UP ON THE HOME SCREEN */
 
 import './ReviewCard.css';
+import Image from 'next/image';
 
 interface ReviewCardProps {
     stars: string;
@@ -17,9 +18,12 @@ export default function ReviewCard({ stars, reviewTitle, reviewAuthor, bookImage
             <p className='stars'>{stars}</p>
             <p className='review-title'>{reviewTitle}</p>
             <p className='review-author'>{reviewAuthor}</p>
-            <img src={bookImage} className='book-image' alt={bookTitle} />
+            <Image src={bookImage} className="book-image" alt={bookTitle} width={500} height={500} />
             <p className='book-title'>{bookTitle}</p>
             <p className='book-author'>{bookAuthor}</p>
         </div>
     );
 }
+
+/*            <img src={bookImage} className='book-image' alt={bookTitle} />
+*/
