@@ -1,6 +1,6 @@
 import './Register.css';
 import {IM_Fell_English_SC} from 'next/font/google';
-import Button from '../Home_Page/Button';
+import Button from '../Shared_Components/Button';
 
 const titleFont = IM_Fell_English_SC({
     subsets: ['latin'],

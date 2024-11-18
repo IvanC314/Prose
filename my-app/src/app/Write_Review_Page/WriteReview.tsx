@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import './WriteReview.css';
-import Button from '../Home_Page/Button';
+import Button from '../Shared_Components/Button';
 
 export default function WriteReview() {
     const [formData, setFormData] = useState({
@@ -21,12 +21,19 @@ export default function WriteReview() {
         }));
     };
 
+    // STOP SUBMITTING IF ENTER IS PRESSED
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
         console.log('Form Data Submitted:', formData); 
         setFormData({ 
             title: '',
-            imageUrl: '',
+            imageUrl: '', 
             author: '',
             reviewTitle: '',
             stars: '',
@@ -36,13 +43,14 @@ export default function WriteReview() {
 
     return (
         <div className="book-background">
-            <form className="page-container" onSubmit={handleSubmit}>
+            <form className="page-container" onSubmit={handleSubmit} onKeyDown={handleKeyDown}
+            >
                 <div className="form-section left-section">
                     <label htmlFor="title" className="textboxLabel">Title:</label>
                     <input
                         type="text"
                         id="title"
-                        className="textbox"
+                        className="textboxReview"
                         placeholder="Enter Book Title"
                         value={formData.title}
                         onChange={handleChange}
@@ -52,7 +60,7 @@ export default function WriteReview() {
                     <input
                         type="text"
                         id="imageUrl"
-                        className="textbox"
+                        className="textboxReview"
                         placeholder="Enter Image URL"
                         value={formData.imageUrl}
                         onChange={handleChange}
@@ -62,7 +70,7 @@ export default function WriteReview() {
                     <input
                         type="text"
                         id="author"
-                        className="textbox"
+                        className="textboxReview"
                         placeholder="Enter Author Name"
                         value={formData.author}
                         onChange={handleChange}
@@ -74,7 +82,7 @@ export default function WriteReview() {
                     <input
                         type="text"
                         id="reviewTitle"
-                        className="textbox"
+                        className="textboxReview"
                         placeholder="Enter Review Title"
                         value={formData.reviewTitle}
                         onChange={handleChange}
@@ -84,7 +92,7 @@ export default function WriteReview() {
                     <input
                         type="text"
                         id="stars"
-                        className="textbox"
+                        className="textboxReview"
                         placeholder="Stars..."
                         value={formData.stars}
                         onChange={handleChange}
@@ -93,13 +101,13 @@ export default function WriteReview() {
                     <label htmlFor="review" className="textboxLabel">Write Review:</label>
                     <textarea
                         id="review"
-                        className="textbox review-box"
+                        className="textboxReview review-box"
                         placeholder="Write your review here..."
                         value={formData.review}
                         onChange={handleChange}
                     ></textarea>
 
-                    <Button text="Post Review" targetPage="../Auth_Home_Page" />
+                    <Button text="Post Review" targetPage="../Auth_Home_Page"/>
                 </div>
             </form>
         </div>

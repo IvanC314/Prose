@@ -1,4 +1,4 @@
-import Button from '../Home_Page/Button';
+import Button from '../Shared_Components/Button';
 import Login from './Login';
 
 export default function LoginPage() {

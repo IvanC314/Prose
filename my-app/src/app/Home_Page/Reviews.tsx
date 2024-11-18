@@ -5,6 +5,7 @@ import ReviewCard from './ReviewCard';
 import testHarry from '../images/testHarry.jpg';
 import testAnimal from '../images/testAnimal.jpg';
 import testAA from '../images/testAA.jpg';
+import {useState} from 'react';
 
 const reviews = [
     {
@@ -34,12 +35,11 @@ const reviews = [
 ];
 
 export default function Reviews() {
+
     return (
         <div className='review-center'>
             <h2 className="featured-reviews-header">Featured Reviews</h2>
-
             <div className='reviews-container'>
-            
                 {reviews.map((review, index) => (
                     <ReviewCard
                         key={index}

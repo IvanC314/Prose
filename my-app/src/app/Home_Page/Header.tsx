@@ -1,7 +1,7 @@
 /* CONSISTS OF DROPDOWN MENU, PROSE TITLE, LOGIN, REGISTER ON HOME PAGE */
 
 import './Header.css';
-import Button from './Button';
+import Button from '../Shared_Components/Button';
 import {IM_Fell_English_SC} from 'next/font/google';
 import GenreButton from './GenreButton';
 
