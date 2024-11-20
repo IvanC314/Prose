@@ -5,7 +5,6 @@ import ReviewCard from './ReviewCard';
 import testHarry from '../images/testHarry.jpg';
 import testAnimal from '../images/testAnimal.jpg';
 import testAA from '../images/testAA.jpg';
-import {useState} from 'react';
 
 const reviews = [
     {
