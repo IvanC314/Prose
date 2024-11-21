@@ -3,14 +3,14 @@ const mongoose = require('mongoose');
 const userReviewSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'user',
     required: true
   },
   review_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Review',
+    ref: 'review',
     required: true
   }
 });
 
-module.exports = mongoose.model('UserReview', userReviewSchema);
+module.exports = mongoose.model('userReviews', userReviewSchema);
