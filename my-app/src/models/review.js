@@ -21,7 +21,14 @@ const reviewSchema = new mongoose.Schema({
   downvotes: {
     type: Number,
     default: 0
-  }
+  },
+  book: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Book",
+  },
+},
+{
+    collection: 'review'
 });
 
-module.exports = mongoose.model('Review', reviewSchema);
+export default mongoose.models.Review || mongoose.model("Review", reviewSchema);

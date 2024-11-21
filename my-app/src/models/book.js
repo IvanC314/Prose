@@ -18,6 +18,9 @@ const bookSchema = new mongoose.Schema({
   img_url: {
     type: String
   }
+},
+{
+    collection: 'book'
 });
 
-module.exports = mongoose.model('Book', bookSchema);
+export default mongoose.models.Book || mongoose.model("Book", bookSchema);
