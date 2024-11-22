@@ -18,6 +18,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   }
+}, {
+  collection: 'users'  // Corrected collection name
 });
 
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', userSchema); // Corrected model name

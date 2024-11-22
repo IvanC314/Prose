@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const Book = require('../books');
 
 const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
-//const uri = process.env.MONGODB_URI;
 
 const books = [
   { 
@@ -48,9 +47,9 @@ async function insertBooks() {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the Book collection
+    // Clear the books collection
     await Book.deleteMany({});
-    console.log('Cleared Book collection');
+    console.log('Cleared books collection');
 
     // Insert new books
     const result = await Book.insertMany(books);

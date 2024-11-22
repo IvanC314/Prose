@@ -24,11 +24,10 @@ const reviewSchema = new mongoose.Schema({
   },
   book: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Book",
+    ref: "books",  // Corrected reference to books collection
   },
-},
-{
-    collection: 'review'
+}, {
+  collection: 'reviews'  // Corrected collection name
 });
 
-export default mongoose.models.Review || mongoose.model("reviews", reviewSchema);
+module.exports = mongoose.model("reviews", reviewSchema); // Corrected model name

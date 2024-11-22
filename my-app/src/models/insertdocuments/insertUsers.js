@@ -1,12 +1,8 @@
 require('dotenv').config();
-console.log(process.env);
 const mongoose = require('mongoose');
 const User = require('../users');
 
 const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
-//const uri = process.env.MONGODB_URI;
-
-console.log('MongoDB URI:', uri); 
 
 const users = [
   { email: 'alice@example.com', f_name: 'Alice', l_name: 'Smith', password: 'password123' },
@@ -21,9 +17,9 @@ async function insertUsers() {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the User collection
+    // Clear the users collection
     await User.deleteMany({});
-    console.log('Cleared User collection');
+    console.log('Cleared users collection');
 
     // Insert new users
     const result = await User.insertMany(users);

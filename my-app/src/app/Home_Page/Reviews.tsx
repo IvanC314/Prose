@@ -1,11 +1,49 @@
-/* BODY THAT CONTAINS ALL THE REVIEW CARDS */
+'use client';
 
 import './Reviews.css';
 import ReviewCard from './ReviewCard';
-import testHarry from '../images/testHarry.jpg';
-import testAnimal from '../images/testAnimal.jpg';
-import testAA from '../images/testAA.jpg';
+import { useEffect, useState } from 'react';
 
+export default function Reviews() {
+    const [reviews, setReviews] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const response = await fetch('/api/reviews');
+                const data = await response.json();
+                console.log(data);  // Log the fetched data to check its structure
+                setReviews(data);
+            } catch (error) {
+                console.error("Failed to fetch reviews:", error);
+            }
+        };
+
+        fetchReviews();
+    }, []);
+
+    return (
+        <div className='review-center'>
+            <h2 className="featured-reviews-header">Featured Reviews</h2>
+            <div className='reviews-container'>
+                {reviews.map((review, index) => (
+                    <ReviewCard
+                        key={index}
+                        stars={"⭐".repeat(review.rating)}
+                        reviewTitle={review.title}                        
+                        reviewAuthor={review.reviewAuthor}
+                        bookImage={review.bookImage}
+                        bookTitle={review.bookTitle}
+                        bookAuthor={review.bookAuthor}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+
+
+/*
 const reviews = [
     {
         stars: '⭐⭐⭐⭐⭐',
@@ -32,25 +70,4 @@ const reviews = [
         bookAuthor: 'Bill W.',
     },
 ];
-
-export default function Reviews() {
-
-    return (
-        <div className='review-center'>
-            <h2 className="featured-reviews-header">Featured Reviews</h2>
-            <div className='reviews-container'>
-                {reviews.map((review, index) => (
-                    <ReviewCard
-                        key={index}
-                        stars={review.stars}
-                        reviewTitle={review.reviewTitle}                        
-                        reviewAuthor={review.reviewAuthor}
-                        bookImage={review.bookImage}
-                        bookTitle={review.bookTitle}
-                        bookAuthor={review.bookAuthor}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-}
+*/

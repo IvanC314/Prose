@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const Review = require('../reviews');
 
 const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
-//const uri = process.env.MONGODB_URI;
 
 const reviews = [
   { title: 'Great Product!', rating: 5, desc: 'Absolutely loved it!' },
@@ -18,9 +17,9 @@ async function insertReviews() {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the Review collection
+    // Clear the reviews collection
     await Review.deleteMany({});
-    console.log('Cleared Review collection');
+    console.log('Cleared reviews collection');
 
     // Insert new reviews
     const result = await Review.insertMany(reviews);

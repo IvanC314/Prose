@@ -5,16 +5,15 @@ const Review = require('../reviews');
 const UserReview = require('../userReviews');
 
 const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
-//const uri = process.env.MONGODB_URI;
 
 async function insertUserReviews() {
   try {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the UserReview collection
+    // Clear the userReviews collection
     await UserReview.deleteMany({});
-    console.log('Cleared UserReview collection');
+    console.log('Cleared userReviews collection');
 
     // Fetch all users and reviews
     const users = await User.find();

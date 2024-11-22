@@ -30,10 +30,13 @@
 //     await Review.create({ title, rating, desc }); 
 //     return NextResponse.json({ message: "Review added successfully" }, { status: 201 });
 // }
-
 import connectMongoDB from "@/libs/mongodb";
-import Review from "@/models/review";
-import Book from "@/models/book";
+import Review from "@/models/reviews";
+import Book from "@/models/books";
+import User from "@/models/users";
+import UserReview from "@/models/userReviews";
+import BookReview from "@/models/bookReviews";
+
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
@@ -91,5 +94,96 @@ export async function POST(request: NextRequest) {
             { error: "An error occurred while saving the data." },
             { status: 500 }
         );
+    }
+}
+
+
+export async function GET(request: NextRequest) {
+    try {
+        await connectMongoDB();
+
+        const reviews = await Review.aggregate([
+            // Step 1: Link the review to the user (via userReviews)
+            {
+                $lookup: {
+                    from: "userReviews",  // Collection name for userReviews
+                    localField: "_id",  // Review's ID
+                    foreignField: "review_id",  // userReviews references the review ID
+                    as: "userReview",
+                },
+            },
+            // Flatten the userReview array to get a single element
+            {
+                $unwind: {
+                    path: "$userReview",
+                    preserveNullAndEmptyArrays: true,  // Keep reviews even if no userReview exists
+                },
+            },
+            // Step 2: Join the user details (from users)
+            {
+                $lookup: {
+                    from: "users",  // Collection name for users
+                    localField: "userReview.user_id",  // userReviews has the user_id field
+                    foreignField: "_id",  // Match user _id
+                    as: "user",  // Resulting user details
+                },
+            },
+            // Flatten the user array
+            {
+                $unwind: {
+                    path: "$user",
+                    preserveNullAndEmptyArrays: true,  // Keep reviews even if no user exists
+                },
+            },
+            // Step 3: Link review to book (via bookReviews)
+            {
+                $lookup: {
+                    from: "bookReviews",  // Linking to the bookReviews table
+                    localField: "_id",  // Review's ID
+                    foreignField: "review_id",  // bookReviews references the review ID
+                    as: "bookReview",
+                },
+            },
+            // Flatten the bookReview array
+            {
+                $unwind: {
+                    path: "$bookReview",
+                    preserveNullAndEmptyArrays: true,  // Keep reviews even if no bookReview exists
+                },
+            },
+            // Step 4: Join book details (from books)
+            {
+                $lookup: {
+                    from: "books",  // Linking to the books table
+                    localField: "bookReview.book_id",  // bookReviews has the book_id field
+                    foreignField: "_id",  // Match book _id
+                    as: "book",  // Resulting book details
+                },
+            },
+            // Flatten the book array
+            {
+                $unwind: {
+                    path: "$book",
+                    preserveNullAndEmptyArrays: true,  // Keep reviews even if no book exists
+                },
+            },
+            // Step 5: Project the relevant fields (flatten the arrays from lookups)
+            {
+                $project: {
+                    title: 1,  // The review title
+                    rating: 1,  // The review rating
+                    desc: 1,  // Review description
+                    reviewAuthor: { $ifNull: ["$user.f_name", "Anonymous"] },  // User first name (author of review), default to 'Anonymous' if not found
+                    bookTitle: { $ifNull: ["$book.title", "Unknown Title"] },  // Book title
+                    bookAuthor: { $ifNull: ["$book.author", "Unknown Author"] },  // Book author
+                    bookImage: { $ifNull: ["$book.img_url", ""] },  // Book image URL, fallback to empty string
+                },
+            },
+        ]);
+
+        return NextResponse.json(reviews);
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
+        return NextResponse.json({ error: "Failed to fetch reviews." }, { status: 500 });
     }
 }

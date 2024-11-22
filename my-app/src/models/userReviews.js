@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const userReviewSchema = new mongoose.Schema({
-  user_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-    required: true
-  },
-  review_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'review',
-    required: true
-  }
+const userReviewSchema = new Schema({
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },  // Corrected reference to users
+  review_id: { type: mongoose.Schema.Types.ObjectId, ref: 'reviews', required: true }  // Corrected reference to reviews
+}, {
+  collection: 'userReviews'  // Corrected collection name
 });
 
-module.exports = mongoose.model('userReviews', userReviewSchema);
+const UserReview = mongoose.model('userReviews', userReviewSchema); // Corrected model name
+
+module.exports = UserReview;
