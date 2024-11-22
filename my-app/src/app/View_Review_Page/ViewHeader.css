@@ -1,0 +1,23 @@
+.title {
+    display: inline-block;
+    padding: 20px;
+    font-size: 5rem;
+    color: #FFFFFF;
+    margin: 10px 10px 10px 10px;
+}
+  
+/* GENRE BUTTON AND TITLE TOGETHER */
+.title-container {
+    display: flex; 
+    align-items: center;
+    gap: 10px;
+}
+
+header 
+{    
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 30px; 
+    height: 100px;
+}

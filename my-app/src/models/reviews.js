@@ -30,4 +30,4 @@ const reviewSchema = new mongoose.Schema({
   collection: 'reviews'  // Corrected collection name
 });
 
-module.exports = mongoose.model("reviews", reviewSchema); // Corrected model name
+module.exports = mongoose.models.reviews || mongoose.model("reviews", reviewSchema);

@@ -90,7 +90,6 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #ffffff;
-    margin-bottom: 5px;
     font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
 }
 
@@ -99,4 +98,25 @@
     color: #ffffff;
     font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
     padding-bottom: 10px;
+}
+
+.upvote-downvote-container {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Space between items */
+}
+
+.vote-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+}
+
+.upvote {
+    color:rgb(0, 255, 0);
+}
+
+.downvote {
+    color:rgb(255, 0, 0);
 }

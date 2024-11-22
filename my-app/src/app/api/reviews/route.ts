@@ -173,6 +173,8 @@ export async function GET(request: NextRequest) {
                     title: 1,  // The review title
                     rating: 1,  // The review rating
                     desc: 1,  // Review description
+                    upvotes: 1,
+                    downvotes: 1,
                     reviewAuthor: { $ifNull: ["$user.f_name", "Anonymous"] },  // User first name (author of review), default to 'Anonymous' if not found
                     bookTitle: { $ifNull: ["$book.title", "Unknown Title"] },  // Book title
                     bookAuthor: { $ifNull: ["$book.author", "Unknown Author"] },  // Book author

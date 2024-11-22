@@ -1,5 +1,5 @@
 import connectMongoDB from "@/libs/mongodb";
-import Item from "@/models/review";
+import Item from "@/models/reviews";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import mongoose from "mongoose";

@@ -35,6 +35,8 @@ export default function Reviews() {
                         bookImage={review.bookImage}
                         bookTitle={review.bookTitle}
                         bookAuthor={review.bookAuthor}
+                        upvotes={review.upvotes}
+                        downvotes={review.downvotes}
                     />
                 ))}
             </div>

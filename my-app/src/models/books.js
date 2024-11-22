@@ -22,4 +22,4 @@ const bookSchema = new mongoose.Schema({
   collection: 'books'  // Corrected collection name
 });
 
-module.exports = mongoose.model("books", bookSchema); // Corrected model name
+module.exports = mongoose.models.books || mongoose.model("books", bookSchema);
