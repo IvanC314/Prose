@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
-const bookGenreSchema = new mongoose.Schema({
+const bookReviewSchema = new mongoose.Schema({
   book_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book',
     required: true
   },
-  genre_id: {
+  review_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Genre',
+    ref: 'Review',
     required: true
   }
 });
 
-module.exports = mongoose.model('BookGenre', bookGenreSchema);
+module.exports = mongoose.model('bookReviews', bookReviewSchema);
