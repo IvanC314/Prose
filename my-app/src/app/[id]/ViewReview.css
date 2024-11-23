@@ -1,0 +1,107 @@
+/* Main container styles */
+.view-page-wrapper {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+}
+
+/* Background image styles */
+.view-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    z-index: 0;
+}
+
+/* Content container styles */
+.view-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Form container styles */
+.view-page-container {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    width: 70%;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.view-book-image {
+    width: 70%;
+}
+
+/* Form sections styling */
+.view-form-section {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 10px;
+}
+
+.view-left-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; 
+}
+
+.view-right-section {
+    text-align: center;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+/* Text styling */
+.view-form-section p {
+    margin: 0;
+    padding: 10px 0;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Button container styling */
+.view-form-section button {
+    margin-top: 20px;
+}
+
+/* Global styles remain unchanged */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+    .view-page-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .view-form-section {
+        width: 100%;
+    }
+}

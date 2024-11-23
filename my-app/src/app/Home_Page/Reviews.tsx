@@ -28,6 +28,7 @@ export default function Reviews() {
             <div className='reviews-container'>
                 {reviews.map((review, index) => (
                     <ReviewCard
+                        id ={review._id}
                         key={index}
                         stars={"⭐".repeat(review.rating)}
                         reviewTitle={review.title}                        

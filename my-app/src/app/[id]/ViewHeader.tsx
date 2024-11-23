@@ -1,6 +1,6 @@
 /* CONSISTS OF DROPDOWN MENU, PROSE TITLE, LOGIN, REGISTER ON HOME PAGE */
 
-import './WriteHeader.css';
+import './ViewHeader.css';
 import Button from '../Shared_Components/Button';
 import {IM_Fell_English_SC} from 'next/font/google';
 import HomeButton from '../Shared_Components/HomeButton';
@@ -11,7 +11,7 @@ const titleFont = IM_Fell_English_SC({
     adjustFontFallback: false,
 })
 
-export default function WriteHeader() 
+export default function ViewHeader() 
 {
     return (
         <header >

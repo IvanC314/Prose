@@ -10,7 +10,7 @@ const bookSchema = new mongoose.Schema({
     required: true
   },
   genre: {
-    type: [String] // Array of genres for simplicity
+    type: [String] 
   },
   desc: {
     type: String
@@ -19,7 +19,7 @@ const bookSchema = new mongoose.Schema({
     type: String
   }
 }, {
-  collection: 'books'  // Corrected collection name
+  collection: 'books' 
 });
 
 module.exports = mongoose.models.books || mongoose.model("books", bookSchema);

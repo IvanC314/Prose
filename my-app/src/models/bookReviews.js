@@ -8,6 +8,4 @@ const bookReviewSchema = new Schema({
   collection: 'bookReviews'  // Corrected collection name
 });
 
-const BookReview = mongoose.model('bookReviews', bookReviewSchema); // Corrected model name
-
-module.exports = BookReview;
+module.exports = mongoose.models.bookReviews || mongoose.model("bookReviews", bookReviewSchema);

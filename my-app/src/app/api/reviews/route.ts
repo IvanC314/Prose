@@ -170,6 +170,7 @@ export async function GET(request: NextRequest) {
             // Step 5: Project the relevant fields (flatten the arrays from lookups)
             {
                 $project: {
+                    _id: 1,
                     title: 1,  // The review title
                     rating: 1,  // The review rating
                     desc: 1,  // Review description
