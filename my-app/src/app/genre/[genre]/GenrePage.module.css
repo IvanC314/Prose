@@ -1,0 +1,13 @@
+.genreTitle {
+    font-size: 3rem; 
+    font-weight: bold; 
+    color: #FFFFFF;
+    margin-bottom: 20px; 
+    text-transform: capitalize; 
+  }
+  
+  .genreDescription {
+    font-size: 1.2rem;
+    color: #FFFFFF;
+  }
+  
