@@ -23,7 +23,7 @@ export default function AccountPage() {
             firstName: data.f_name,
             lastName: data.l_name,
             email: data.email,
-            username: `${data.f_name.toLowerCase()}${data.l_name.toLowerCase()}`
+            username: data.username,
           });
         } else {
           console.error("Failed to fetch user:", response.statusText);

@@ -4,9 +4,8 @@
     align-items: center;
     justify-content: center;
     padding: 5px;
-    background-color: rgba(34, 34, 34, 0.596);
+    background-color: rgba(171, 171, 171, 0.596);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     cursor:pointer;
 }
@@ -103,7 +102,7 @@
 .upvote-downvote-container {
     display: flex;
     align-items: center;
-    gap: 30px; /* Space between items */
+    gap: 30px;
 }
 
 .vote-container {
@@ -119,4 +118,53 @@
 
 .downvote {
     color:rgb(255, 0, 0);
+}
+
+.review-card-container {
+    background-color: rgba(34, 34, 34, 0.596); 
+    padding: 10px;
+    border-radius: 12px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Adjusted button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Button styles */
+.edit-button, .delete-button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button {
+    background-color: rgb(50, 150, 255); /* Blue for edit */
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: rgb(30, 120, 220);
+}
+
+.delete-button {
+    background-color: rgb(255, 50, 50); /* Red for delete */
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: rgb(220, 30, 30);
 }

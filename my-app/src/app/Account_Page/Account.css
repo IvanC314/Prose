@@ -71,17 +71,12 @@
 }
 
 .account-logout-button {
-    background-color: rgb(227, 47, 47);
+    background-color: rgb(200, 13, 13);
 }
 
 .account-logout-button:hover {
-    background-color: rgb(199, 19, 19);
+    background-color: rgb(173, 9, 9);
 }
-
-.account-logout-button:hover {
-    background-color: rgb(199, 19, 19);
-}
-
 
 
 

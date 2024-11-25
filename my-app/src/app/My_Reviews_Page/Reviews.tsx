@@ -1,7 +1,7 @@
 'use client';
 
 import './Reviews.css';
-import ReviewCard from './ReviewCard';
+import MyReviewCard from './MyReviewCard';
 import { useEffect, useState } from 'react';
 
 export default function Reviews() {
@@ -12,7 +12,7 @@ export default function Reviews() {
             try {
                 const response = await fetch('/api/reviews');
                 const data = await response.json();
-                console.log(data);  // Log the fetched data to check its structure
+                console.log(data);
                 setReviews(data);
             } catch (error) {
                 console.error("Failed to fetch reviews:", error);
@@ -24,10 +24,9 @@ export default function Reviews() {
 
     return (
         <div className='review-center'>
-            <h2 className="featured-reviews-header">Featured Reviews</h2>
             <div className='reviews-container'>
                 {reviews.map((review, index) => (
-                    <ReviewCard
+                    <MyReviewCard
                         id ={review._id}
                         key={index}
                         stars={"⭐".repeat(review.rating)}

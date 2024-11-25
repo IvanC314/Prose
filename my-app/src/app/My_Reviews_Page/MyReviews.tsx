@@ -1,6 +1,7 @@
 import HomeHeader from "../Shared_Components/HomeHeader";
 import Button from "../Shared_Components/Button";
 import './MyReviews.css';
+import Reviews from "./Reviews";
 
 export default function MyReviews() {
   return (
@@ -17,6 +18,8 @@ export default function MyReviews() {
       <div className="reviews-title-wrapper">
         <h1 className="reviews-title">My Reviews</h1>
       </div>
+      <Reviews/>
     </div>
   );
 }
+
