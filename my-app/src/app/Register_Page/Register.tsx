@@ -1,45 +1,116 @@
+"use client";
+
 import './Register.css';
-import {IM_Fell_English_SC} from 'next/font/google';
+import { IM_Fell_English_SC } from 'next/font/google';
 import Button from '../Shared_Components/Button';
+import { useState } from 'react';
 
 const titleFont = IM_Fell_English_SC({
-    subsets: ['latin'],
-    weight: ['400'],
-    adjustFontFallback: false,
-})
+  subsets: ['latin'],
+  weight: ['400'],
+  adjustFontFallback: false,
+});
 
+export default function Register() {
+  const [f_name, setFName] = useState('');
+  const [l_name, setLName] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
-export default function Register() 
-{
-    return (
-        
-        <div className='register-container'>
-            <h1 className={`${titleFont.className} title-register`}>Prose</h1>
-            <p className='text-register'>Register</p>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
 
-            <div className='name-container'>
-                <label htmlFor="username" className="textboxLabel">First Name</label>
-                <label htmlFor="username" className="textboxLabel">Last Name</label>
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ f_name, l_name, email, username, password, confirmPassword }),
+    });
 
-                <input type="text" id="username" className="textbox" placeholder="Type..." />
-                <input type="text" id="username" className="textbox" placeholder="Type..." />
+    const data = await response.json();
 
-            </div>
+    if (!response.ok) {
+      setError(data.error);
+    }
+  };
 
-            <label htmlFor="email" className="textboxLabel">Email Address</label>
-            <input type="email" id="email" className="textbox" placeholder="Type..." />
+  return (
+    <div className="register-container">
+      <div className="title-container">
+        <h1 className={`${titleFont.className} title-register`}>Prose</h1>
+      </div>
+      <p className="text-register">Register</p>
 
-            <label htmlFor="username" className="textboxLabel">Username</label>
-            <input type="text" id="username" className="textbox" placeholder="Type..." />
+      {error && <p className="error">{error}</p>}
 
-            <label htmlFor="password" className="textboxLabel">Password</label>
-            <input type="password" id="password" className="textbox" placeholder="Type..." />  
+      <form onSubmit={handleSubmit}>
+        <div className="name-container">
+          <label htmlFor="f_name" className="textboxLabel">First Name</label>
+          <input
+            type="text"
+            id="f_name"
+            className="textbox"
+            placeholder="First Name"
+            value={f_name}
+            onChange={(e) => setFName(e.target.value)}
+          />
 
-            <label htmlFor="password" className="textboxLabel">Confirm Password</label>
-            <input type="password" id="password" className="textbox" placeholder="Type..." />   
-                
-            <Button text="Create an Account" targetPage='../Auth_Home_Page'/>
+          <label htmlFor="l_name" className="textboxLabel">Last Name</label>
+          <input
+            type="text"
+            id="l_name"
+            className="textbox"
+            placeholder="Last Name"
+            value={l_name}
+            onChange={(e) => setLName(e.target.value)}
+          />
         </div>
-    );
-};
 
+        <label htmlFor="email" className="textboxLabel">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          className="textbox"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <label htmlFor="username" className="textboxLabel">Username</label>
+        <input
+          type="text"
+          id="username"
+          className="textbox"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <label htmlFor="password" className="textboxLabel">Password</label>
+        <input
+          type="password"
+          id="password"
+          className="textbox"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <label htmlFor="confirmPassword" className="textboxLabel">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          className="textbox"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+
+        <Button text="Create an Account" type="submit" />
+      </form>
+    </div>
+  );
+}
