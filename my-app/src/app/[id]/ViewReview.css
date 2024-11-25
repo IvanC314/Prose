@@ -1,12 +1,11 @@
-/* Main container styles */
 .view-page-wrapper {
+    margin-top: 20px;
     position: relative;
     min-height: 100vh;
     width: 100%;
     overflow-y: auto;
 }
 
-/* Background image styles */
 .view-background-image {
     position: absolute;
     top: 0;
@@ -17,7 +16,6 @@
     z-index: 0;
 }
 
-/* Content container styles */
 .view-content {
     position: relative;
     z-index: 1;
@@ -28,9 +26,7 @@
     align-items: flex-start;
 }
 
-/* Form container styles */
 .view-page-container {
-    margin-top: 100px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -45,7 +41,6 @@
     width: 70%;
 }
 
-/* Form sections styling */
 .view-form-section {
     width: 45%;
     display: flex;
@@ -59,8 +54,8 @@
 .view-left-section {
     text-align: center;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center horizontally */
+    flex-direction: column; 
+    align-items: center; 
     justify-content: center; 
 }
 
@@ -72,7 +67,6 @@
     text-align: left;
 }
 
-/* Text styling */
 .view-form-section p {
     margin: 0;
     padding: 10px 0;
@@ -81,12 +75,10 @@
     color: #333;
 }
 
-/* Button container styling */
 .view-form-section button {
     margin-top: 20px;
 }
 
-/* Global styles remain unchanged */
 body, html {
     margin: 0;
     padding: 0;
@@ -94,7 +86,6 @@ body, html {
     overflow-x: hidden;
 }
 
-/* Media query for responsive design */
 @media (max-width: 768px) {
     .view-page-container {
         flex-direction: column;
@@ -104,4 +95,60 @@ body, html {
     .view-form-section {
         width: 100%;
     }
+}
+
+.view-voting-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    text-align: center;
+}
+
+.upvote {
+    color:rgb(0, 255, 0);
+}
+
+.downvote {
+    color:rgb(255, 0, 0);
+}
+
+.view-upvote-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #8b1eb6;
+    border-radius: 5px;
+    background-color: #aac5a0;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-upvote-button:hover {
+    border-color: #888;
+    background-color: #4bcc87;
+    color: #000;
+}
+
+.view-downvote-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #8b1eb6;
+    border-radius: 5px;
+    background-color: #dba9e4;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-downvote-button:hover {
+    border-color: #888;
+    background-color: #da93e7;
+    color: #000;
 }

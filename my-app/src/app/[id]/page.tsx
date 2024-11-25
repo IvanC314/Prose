@@ -1,16 +1,6 @@
-// import ViewHeader from "./ViewHeader";
-// import ViewReview from "./ViewReview";
 
-// export default function Home() {
-//   return (
-//     <div>
-//         <ViewHeader/>
-//         <ViewReview/>
-//     </div>
-//   );
-// }
 import React from 'react';
-import ViewHeader from "./ViewHeader";
+import ViewHeader from "../Shared_Components/HomeHeader";
 import ViewReview from "./ViewReview";
 
 interface ReviewProps {
@@ -26,7 +16,9 @@ interface ReviewProps {
 
 const ReviewPage = async ({ params }: { params: { id: string } }) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/reviews/${params.id}`);
+        const res = await fetch(`http://localhost:3000/api/reviews/${params.id}`, {
+            cache: 'no-store',
+        });
         
         if (!res.ok) {
             throw new Error(`Failed to fetch review with status: ${res.status}`);
@@ -55,6 +47,7 @@ const ReviewPage = async ({ params }: { params: { id: string } }) => {
             <div>
                 <ViewHeader />
                 <ViewReview
+                    reviewId={review._id}
                     stars={"⭐".repeat(review.rating)}
                     reviewTitle={review.title}
                     reviewText={review.desc}
@@ -62,6 +55,8 @@ const ReviewPage = async ({ params }: { params: { id: string } }) => {
                     bookTitle={book.title || "Unknown Title"}
                     bookAuthor={book.author || "Unknown Author"}
                     bookDesc={book.desc || "No description"}
+                    upvotes={review.upvotes}
+                    downvotes={review.downvotes}
                 />
             </div>
         );

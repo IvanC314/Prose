@@ -1,35 +1,3 @@
-// import connectMongoDB from "@/libs/mongodb";
-// import Review from "@/models/review";
-// import { NextResponse } from "next/server";
-// import { NextRequest } from "next/server";
-
-// export async function GET(request: NextRequest) {
-//     await connectMongoDB();
-//     const reviews = await Review.find(); // Fetch all reviews
-//     return NextResponse.json({ reviews });
-// }
-
-// export async function POST(request: NextRequest) {
-//     const { title, rating, desc } = await request.json(); // Expecting fields defined in the schema
-//     if (!title || !rating) {
-//         return NextResponse.json(
-//             { error: "Title and rating are required fields." },
-//             { status: 400 }
-//         );
-//     }
-
-//     // Validate rating value
-//     if (rating < 1 || rating > 5) {
-//         return NextResponse.json(
-//             { error: "Rating must be a number between 1 and 5." },
-//             { status: 400 }
-//         );
-//     }
-
-//     await connectMongoDB();
-//     await Review.create({ title, rating, desc }); 
-//     return NextResponse.json({ message: "Review added successfully" }, { status: 201 });
-// }
 import connectMongoDB from "@/libs/mongodb";
 import Review from "@/models/reviews";
 import Book from "@/models/books";
@@ -176,7 +144,7 @@ export async function GET(request: NextRequest) {
                     desc: 1,  // Review description
                     upvotes: 1,
                     downvotes: 1,
-                    reviewAuthor: { $ifNull: ["$user.f_name", "Anonymous"] },  // User first name (author of review), default to 'Anonymous' if not found
+                    reviewAuthor: { $ifNull: ["$user.username", "Anonymous"] },  // User first name (author of review), default to 'Anonymous' if not found
                     bookTitle: { $ifNull: ["$book.title", "Unknown Title"] },  // Book title
                     bookAuthor: { $ifNull: ["$book.author", "Unknown Author"] },  // Book author
                     bookImage: { $ifNull: ["$book.img_url", ""] },  // Book image URL, fallback to empty string

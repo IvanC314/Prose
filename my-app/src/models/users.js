@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
   email: {
     type: String,
     required: true,
@@ -19,7 +24,7 @@ const userSchema = new mongoose.Schema({
     required: true
   }
 }, {
-  collection: 'users'  // Corrected collection name
+  collection: 'users' 
 });
 
-module.exports = mongoose.model('users', userSchema); // Corrected model name
+module.exports = mongoose.models.users || mongoose.model("users", userSchema);
