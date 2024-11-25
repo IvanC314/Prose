@@ -5,7 +5,7 @@ import './Button.css';
 interface ButtonProps {
     text: string;
     targetPage?: string;  // Optional targetPage since it's not always used
-    onClick: () => void;  // Add onClick prop to handle the click behavior
+    onClick?: () => void;  // Add onClick prop to handle the click behavior
 }
 
 export default function Button({ text, targetPage, onClick }: ButtonProps) {
@@ -13,7 +13,10 @@ export default function Button({ text, targetPage, onClick }: ButtonProps) {
 
     const handleClick = (event: React.MouseEvent) => {
         console.log("Button clicked, executing onClick...");
-        onClick(); // Execute the onClick passed as a prop
+
+        if (onClick) {
+            onClick();
+        }
 
         // Only navigate if a targetPage is specified
         if (targetPage) {

@@ -195,7 +195,7 @@ export default function WriteReview() {
                         onChange={handleChange}
                     ></textarea>
 
-                    <Button text="Post Review" targetPage="../Auth_Home_Page"/>
+                    <Button text="Post Review" targetPage="../Home_Page"/>
                 </div>
             </form>
         </div>

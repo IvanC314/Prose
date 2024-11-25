@@ -1,71 +1,6 @@
-// "use client";
-// import React from 'react';
-// import './ViewReview.css';
-// import Button from '../Shared_Components/Button';
-// import book from '../images/OpenBook2.png';
-// import { FaArrowUp } from "react-icons/fa";
-// import { FaArrowDown } from "react-icons/fa";
-
-// interface ViewReviewProps {
-//     stars: string;
-//     reviewTitle: string;
-//     reviewText: string;
-//     bookImage: string;
-//     bookTitle: string;
-//     bookAuthor: string;
-//     bookDesc: string;
-//     upvotes: number;
-//     downvotes: number;
-// }
-
-// export default function ViewReview({
-//     stars,
-//     reviewTitle,
-//     reviewText,
-//     bookImage,
-//     bookTitle,
-//     bookAuthor,
-//     bookDesc,
-//     upvotes,
-//     downvotes,
-// }: ViewReviewProps) {
-//     return (
-//         <div>
-//             <div className='view-voting-wrapper'>
-//                 <button className='view-upvote-button'><FaArrowUp  className='upvote'/>{upvotes}</button>
-            
-//                 <button className='view-downvote-button'><FaArrowDown  className='downvote'/>{downvotes}</button>
-//             </div>
-
-//             <div className="view-page-wrapper">
-
-//                 <img src={book.src} alt="Book background" className="view-background-image" />
-//                 <div className="view-content">
-//                     <form className="view-page-container">
-//                         <div className="view-form-section view-left-section">
-//                             <p><strong>Book:</strong> {bookTitle}</p>
-//                             <img src={bookImage} alt={bookTitle} className="view-book-image" />
-//                             <p><strong>Author:</strong> {bookAuthor}</p>
-//                             <p className='text-align-left'><strong>Description:</strong> {bookDesc}</p>
-
-//                         </div>
-
-//                         <div className="view-form-section view-right-section">
-//                             <p><strong> "{reviewTitle}"</strong></p>
-//                             <p><strong> {stars}</strong></p>
-//                             <p className='text-align-left'><strong>Review:</strong> {reviewText}</p>
-//                         </div>
-//                     </form>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-
 "use client";
 import React, { useState } from "react";
 import "./ViewReview.css";
-import Button from "../Shared_Components/Button";
 import book from "../images/OpenBook2.png";
 import { FaArrowUp } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
@@ -107,7 +42,6 @@ export default function ViewReview({
         try {
             const res = await fetch(`/api/reviews/${reviewId}`, {
                 method: "PUT",
-                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ [endpoint]: newValue }),
             });
 

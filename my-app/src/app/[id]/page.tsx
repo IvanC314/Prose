@@ -1,16 +1,6 @@
-// import ViewHeader from "./ViewHeader";
-// import ViewReview from "./ViewReview";
 
-// export default function Home() {
-//   return (
-//     <div>
-//         <ViewHeader/>
-//         <ViewReview/>
-//     </div>
-//   );
-// }
 import React from 'react';
-import ViewHeader from "./ViewHeader";
+import ViewHeader from "../Shared_Components/HomeHeader";
 import ViewReview from "./ViewReview";
 
 interface ReviewProps {
