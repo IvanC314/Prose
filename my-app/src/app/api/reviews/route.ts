@@ -176,7 +176,7 @@ export async function GET(request: NextRequest) {
                     desc: 1,  // Review description
                     upvotes: 1,
                     downvotes: 1,
-                    reviewAuthor: { $ifNull: ["$user.f_name", "Anonymous"] },  // User first name (author of review), default to 'Anonymous' if not found
+                    reviewAuthor: { $ifNull: ["$user.username", "Anonymous"] },  // User first name (author of review), default to 'Anonymous' if not found
                     bookTitle: { $ifNull: ["$book.title", "Unknown Title"] },  // Book title
                     bookAuthor: { $ifNull: ["$book.author", "Unknown Author"] },  // Book author
                     bookImage: { $ifNull: ["$book.img_url", ""] },  // Book image URL, fallback to empty string

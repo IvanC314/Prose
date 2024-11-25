@@ -1,6 +1,8 @@
+// layout.tsx
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AuthProvider } from "./AuthContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <AuthProvider>
+          {children}  {/* This will include everything inside the pages (including Home page) */}
+        </AuthProvider>
       </body>
     </html>
   );

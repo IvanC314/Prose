@@ -1,5 +1,5 @@
-import Header from './Home_Page/Header';
-import Reviews from './Home_Page/Reviews';
+import Header from './Header';
+import Reviews from './Reviews';
 // import { useAuth } from './providers/AuthContext'; // Commented out for debugging
 
 export default function Home() {
