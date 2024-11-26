@@ -7,6 +7,7 @@ interface BookSuggestion {
   title: string;
   author_name?: string[]; 
   isbn?: string[]; 
+  key?: string; 
 }
 
 export default function WriteReview() {
@@ -14,12 +15,12 @@ export default function WriteReview() {
     title: "",
     imageUrl: "",
     author: "",
+    description: "",
     reviewTitle: "",
     stars: "",
     review: "",
   });
 
-  
   const [suggestions, setSuggestions] = useState<BookSuggestion[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -29,11 +30,10 @@ export default function WriteReview() {
       [id]: value,
     }));
 
-    
     if (id === "title" && value.length > 2) {
       fetchBookSuggestions(value);
     } else if (id === "title" && value.length <= 2) {
-      setSuggestions([]); 
+      setSuggestions([]);
     }
   };
 
@@ -43,13 +43,28 @@ export default function WriteReview() {
         `https://openlibrary.org/search.json?title=${searchTerm}`
       );
       const data = await response.json();
-      setSuggestions(data.docs.slice(0, 5)); // Limit to top 5 suggestions
+      setSuggestions(data.docs.slice(0, 5));
     } catch (error) {
       console.error("Error fetching book suggestions:", error);
     }
   };
 
-  const handleSuggestionClick = (book: BookSuggestion) => {
+  const fetchBookDescription = async (workKey: string | undefined) => {
+    if (!workKey) return "No description available.";
+
+    try {
+      const response = await fetch(`https://openlibrary.org${workKey}.json`);
+      const data = await response.json();
+      return data.description?.value || "No description available."; 
+    } catch (error) {
+      console.error("Error fetching book description:", error);
+      return "Error fetching description.";
+    }
+  };
+
+  const handleSuggestionClick = async (book: BookSuggestion) => {
+    const description = await fetchBookDescription(book.key); 
+
     setFormData((prevData) => ({
       ...prevData,
       title: book.title,
@@ -57,8 +72,9 @@ export default function WriteReview() {
       imageUrl: book.isbn
         ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-L.jpg`
         : "",
+      description, 
     }));
-    setSuggestions([]); 
+    setSuggestions([]);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -84,7 +100,6 @@ export default function WriteReview() {
       },
     };
 
-    
     if (!reviewData.title || !reviewData.rating || isNaN(reviewData.rating)) {
       console.error("Review title and a valid numeric rating are required.");
       return;
@@ -107,6 +122,7 @@ export default function WriteReview() {
           title: "",
           imageUrl: "",
           author: "",
+          description: "",
           reviewTitle: "",
           stars: "",
           review: "",
@@ -139,7 +155,6 @@ export default function WriteReview() {
             onChange={handleChange}
           />
 
-          
           {suggestions.length > 0 && (
             <ul className="suggestions-dropdown">
               {suggestions.map((book, index) => (
@@ -178,6 +193,17 @@ export default function WriteReview() {
             value={formData.author}
             onChange={handleChange}
           />
+
+          <label htmlFor="description" className="textboxLabel">
+            Book Description:
+          </label>
+          <textarea
+            id="description"
+            className="textboxReview review-box"
+            placeholder="Book description will appear here..."
+            value={formData.description}
+            readOnly
+          ></textarea>
         </div>
 
         <div className="form-section right-section">
