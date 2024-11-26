@@ -34,7 +34,7 @@
 .textboxLabel {
     font-size: 1.6rem;
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     display: block;
 }
 
@@ -65,4 +65,9 @@
     color: red;
     font-size: 1rem;
     margin-top: 10px;
+}
+
+form{
+    width: 100%;
+    text-align: center;
 }
