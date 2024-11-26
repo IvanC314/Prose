@@ -1,10 +1,19 @@
 "use client";
 
+<<<<<<< Updated upstream
 import React, { useState } from 'react';
 import './Header.css';
 import Button from '../Shared_Components/Button';
 import { IM_Fell_English_SC } from 'next/font/google';
 import GenreButton from './GenreButton'; // This might already contain the big burger icon
+=======
+import React, { useState, useEffect, useRef } from "react";
+import "./Header.css";
+import Button from "../Shared_Components/Button";
+import { IM_Fell_English_SC } from "next/font/google";
+import GenreButton from "./GenreButton";
+import Link from "next/link";
+>>>>>>> Stashed changes
 
 const titleFont = IM_Fell_English_SC({
   subsets: ['latin'],
@@ -13,12 +22,58 @@ const titleFont = IM_Fell_English_SC({
 });
 
 export default function Header() {
+<<<<<<< Updated upstream
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const genres = ['Fantasy', 'Sci-Fi', 'Mystery', 'Non-Fiction', 'Romance', 'Young Adult', 'Education', 'Other'];
+=======
+  const isLoggedIn = true; // Hardcoded login state
+  const username = "JohnDoe123"; // Hardcoded username for now
+  const [isDropdownOpen, setDropdownOpen] = useState(false); // State for genre dropdown menu
+  const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); // State for username dropdown menu
+  const userDropdownRef = useRef<HTMLDivElement | null>(null); // Ref for the username dropdown
+
+  const genres = [
+    "Fantasy",
+    "Sci-Fi",
+    "Mystery",
+    "Non-Fiction",
+    "Romance",
+    "Young Adult",
+    "Education",
+    "Other",
+  ];
+>>>>>>> Stashed changes
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+
+  const toggleUserDropdown = () => {
+    setUserDropdownOpen(!isUserDropdownOpen);
+  };
+
+  const handleLogout = () => {
+    console.log("Logged out!");
+    // Simulate logging out
+    window.location.href = "/"; // Redirect to the home page
+  };
+
+  // Close the user dropdown when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target as Node)
+      ) {
+        setUserDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header>
@@ -39,9 +94,58 @@ export default function Header() {
           ))}
         </div>
       )}
+<<<<<<< Updated upstream
       <div>
         <Button text="Login" targetPage="../Login_Page" />
         <Button text="Register" targetPage="../Register_Page" />
+=======
+
+      <div className="user-section" ref={userDropdownRef}>
+        {isLoggedIn ? (
+          <>
+            <Button
+              text="Write Review"
+              targetPage="/Write_Review_Page"
+              onClick={() => console.log("Navigating to Write Review page...")}
+            />
+            <button className="username-button" onClick={toggleUserDropdown}>
+              {username} ▼
+            </button>
+            {isUserDropdownOpen && (
+              <div className="user-dropdown-menu">
+                <div
+                  className="dropdown-item"
+                  onClick={() => (window.location.href = "/My_Reviews_Page")}
+                >
+                  My Reviews
+                </div>
+                <div
+                  className="dropdown-item"
+                  onClick={() => (window.location.href = "/Account_Page")}
+                >
+                  Account Info
+                </div>
+                <div className="dropdown-item" onClick={handleLogout}>
+                  Logout
+                </div>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <Button
+              text="Login"
+              targetPage="/Login_Page"
+              onClick={() => console.log("Navigating to Login page...")}
+            />
+            <Button
+              text="Register"
+              targetPage="/Register_Page"
+              onClick={() => console.log("Navigating to Register page...")}
+            />
+          </>
+        )}
+>>>>>>> Stashed changes
       </div>
     </header>
   );
