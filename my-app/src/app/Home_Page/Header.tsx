@@ -27,7 +27,7 @@ export default function Header() {
     "Non-Fiction",
     "Romance",
     "Young Adult",
-    "Education",
+    "Philosophy",
     "Other",
   ];
 
@@ -80,15 +80,14 @@ export default function Header() {
       </div>
       {/* Dropdown Menu */}
       {isDropdownOpen && (
-        <div className="dropdown-menu">
-          {genres.map((genre, index) => (
-            <div className="dropdown-item" key={index}>
-              {genre}
-            </div>
-          ))}
-        </div>
-      )}
-
+      <div className="dropdown-menu">
+        {genres.map((genre, index) => (
+          <Link href={`/genre/${genre.toLowerCase()}`} key={index}>
+            <div className="dropdown-item">{genre}</div>
+          </Link>
+        ))}
+      </div>
+       )}
       <div className="user-section" ref={userDropdownRef}>
         {isLoggedIn ? (
           <>
