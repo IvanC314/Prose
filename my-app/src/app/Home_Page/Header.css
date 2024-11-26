@@ -39,6 +39,7 @@ header {
 }
 
 .dropdown-menu {
+  font-family: Georgia, serif;
   position: absolute;
   top: 60px;
   left: 20px;
@@ -52,6 +53,7 @@ header {
 }
 
 .dropdown-item {
+  font-family: Georgia, serif;
   padding: 8px 12px;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -63,6 +65,7 @@ header {
 
 /* Username Button */
 .username-button {
+  font-family: Georgia, serif;
   background-color: #b92680;
   color: #fff;
   border: none;

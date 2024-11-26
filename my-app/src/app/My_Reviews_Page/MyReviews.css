@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    font-family: Georgia, serif;
     padding: 10px 20px;
 }
 
@@ -30,7 +30,7 @@
     font-weight: bold;
     color: white;
     margin: 0;
-    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    font-family: Georgia, serif;
 }
 
 .button-container {
@@ -43,7 +43,7 @@
 .edit-button, .delete-button {
     padding: 8px 16px;
     font-size: 1rem;
-    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    font-family: Georgia, serif;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -53,6 +53,7 @@
 .edit-button {
     background-color: rgb(50, 150, 255); /* Blue for edit */
     color: white;
+    font-family: Georgia, serif;
 }
 
 .edit-button:hover {
@@ -62,6 +63,7 @@
 .delete-button {
     background-color: rgb(255, 50, 50); /* Red for delete */
     color: white;
+    font-family: Georgia, serif;
 }
 
 .delete-button:hover {

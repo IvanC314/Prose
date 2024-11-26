@@ -177,7 +177,7 @@ export default function WriteReview() {
             type="text"
             id="imageUrl"
             className="textboxReview"
-            placeholder="Enter Image URL"
+            placeholder="URL will appear here..."
             value={formData.imageUrl}
             onChange={handleChange}
           />
@@ -189,7 +189,7 @@ export default function WriteReview() {
             type="text"
             id="author"
             className="textboxReview"
-            placeholder="Enter Author Name"
+            placeholder="Author will appear here..."
             value={formData.author}
             onChange={handleChange}
           />
