@@ -1,63 +1,103 @@
 .title {
-    display: inline-block;
-    padding: 20px;
-    font-size: 5rem;
-    color: #ffffff;
-    margin: 10px 10px 10px 10px;
-  }
-  
-  .title-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px;
-    height: 100px;
-  }
-  
-  .genre-button {
-    color: white;
-    cursor: pointer;
-    height: 3.5rem;
-    width: 3.5rem;
-  }
-  
-  .genre-button:hover {
-    color: rgb(238, 110, 193);
-  }
-  
-  .burger-icon {
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 15px;
-    color: #fff;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 60px;
-    left: 20px;
-    background-color: rgba(51, 51, 51, 0.7); 
-    backdrop-filter: blur(10px); 
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-  }
-    
-  .dropdown-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #444;
-  }
-  
+  display: inline-block;
+  padding: 20px;
+  font-size: 5rem;
+  color: #ffffff;
+  margin: 10px 10px 10px 10px;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  height: 100px;
+}
+
+.genre-button {
+  color: white;
+  cursor: pointer;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.genre-button:hover {
+  color: rgb(238, 110, 193);
+}
+
+.burger-icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 15px;
+  color: #fff;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background-color: #333;
+  color: white;
+  opacity: 0.95;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #444;
+}
+
+/* Username Button */
+.username-button {
+  background-color: #b92680;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  position: relative;
+  outline: none;
+}
+
+.username-button:hover {
+  background-color: #b32c98;
+}
+
+/* User Dropdown Menu */
+.user-dropdown-menu {
+  position: absolute;
+  top: 60px; /* Aligns with the username button */
+  right: 0;
+  background-color: #333;
+  color: white;
+  opacity: 0.95;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  z-index: 20;
+}
+
+.user-dropdown-menu .dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.user-dropdown-menu .dropdown-item:hover {
+  background-color: #444;
+}

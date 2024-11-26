@@ -1,7 +1,3 @@
-import mongoose from "mongoose";
-import connectMongoDB from "@/libs/mongodb";
-import User from "@/models/users"; // Assuming this is the corrected path to your user model
-import { NextResponse } from "next/server";
 
 // export async function GET() {
 //   const userId = "6744bf7009071684bf6f7cb9";
