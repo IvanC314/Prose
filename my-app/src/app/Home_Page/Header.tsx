@@ -1,19 +1,11 @@
 "use client";
 
-<<<<<<< Updated upstream
-import React, { useState } from 'react';
-import './Header.css';
-import Button from '../Shared_Components/Button';
-import { IM_Fell_English_SC } from 'next/font/google';
-import GenreButton from './GenreButton'; // This might already contain the big burger icon
-=======
 import React, { useState, useEffect, useRef } from "react";
 import "./Header.css";
 import Button from "../Shared_Components/Button";
 import { IM_Fell_English_SC } from "next/font/google";
 import GenreButton from "./GenreButton";
 import Link from "next/link";
->>>>>>> Stashed changes
 
 const titleFont = IM_Fell_English_SC({
   subsets: ['latin'],
@@ -22,10 +14,6 @@ const titleFont = IM_Fell_English_SC({
 });
 
 export default function Header() {
-<<<<<<< Updated upstream
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const genres = ['Fantasy', 'Sci-Fi', 'Mystery', 'Non-Fiction', 'Romance', 'Young Adult', 'Education', 'Other'];
-=======
   const isLoggedIn = true; // Hardcoded login state
   const username = "JohnDoe123"; // Hardcoded username for now
   const [isDropdownOpen, setDropdownOpen] = useState(false); // State for genre dropdown menu
@@ -42,7 +30,6 @@ export default function Header() {
     "Education",
     "Other",
   ];
->>>>>>> Stashed changes
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -94,11 +81,6 @@ export default function Header() {
           ))}
         </div>
       )}
-<<<<<<< Updated upstream
-      <div>
-        <Button text="Login" targetPage="../Login_Page" />
-        <Button text="Register" targetPage="../Register_Page" />
-=======
 
       <div className="user-section" ref={userDropdownRef}>
         {isLoggedIn ? (
@@ -145,7 +127,6 @@ export default function Header() {
             />
           </>
         )}
->>>>>>> Stashed changes
       </div>
     </header>
   );

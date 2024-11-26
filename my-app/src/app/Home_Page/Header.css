@@ -1,57 +1,4 @@
 .title {
-<<<<<<< Updated upstream
-    display: inline-block;
-    padding: 20px;
-    font-size: 5rem;
-    color: #FFFFFF;
-    margin: 10px 10px 10px 10px;
-}
-  
-.title-container {
-    display: flex; 
-    align-items: center;
-    gap: 10px;
-}
-
-.burger-icon {
-    font-size: 24px;
-    cursor: pointer;
-    margin-right: 15px;
-    color: #fff;
-  }
-  
-  .dropdown-menu {
-    position: absolute;
-    top: 60px; 
-    left: 20px; 
-    background-color: #333;
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-  }
-  
-  .dropdown-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #444;
-  }
-
-  header 
-{    
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 30px; 
-    height: 100px;
-}
-  
-=======
   display: inline-block;
   padding: 20px;
   font-size: 5rem;
@@ -154,4 +101,3 @@ header {
 .user-dropdown-menu .dropdown-item:hover {
   background-color: #444;
 }
->>>>>>> Stashed changes
