@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import Button from "../Shared_Components/Button";
 import { IM_Fell_English_SC } from "next/font/google";
@@ -15,7 +15,7 @@ const titleFont = IM_Fell_English_SC({
 });
 
 export default function Header() {
-  const { isLoggedIn, logout } = useAuth(); // Get auth state and logout function
+  const { isLoggedIn, logout, username, user_id } = useAuth(); // Get auth state and logout function
   const [isDropdownOpen, setDropdownOpen] = useState(false); // State for dropdown menu
 
   const genres = [
@@ -32,6 +32,14 @@ export default function Header() {
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+
+  // Log auth status when the component mounts
+  useEffect(() => {
+    console.log("Home Page Loaded!");
+    console.log("isLoggedIn:", isLoggedIn);
+    console.log("Username:", username);
+    console.log("User ID:", user_id);
+  }, [isLoggedIn, username, user_id]); // Re-run log if any of these values change
 
   return (
     <header>

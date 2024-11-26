@@ -17,13 +17,18 @@ async function insertUsers() {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the users collection
-    await User.deleteMany({});
-    console.log('Cleared users collection');
-
-    // Insert new users
-    const result = await User.insertMany(users);
-    console.log('Users inserted:', result);
+    // Insert new users only if their username does not already exist in the database
+    for (const user of users) {
+      const existingUser = await User.findOne({ username: user.username });
+      
+      if (existingUser) {
+        console.log(`User with username ${user.username} already exists, skipping.`);
+      } else {
+        const newUser = new User(user);
+        await newUser.save();
+        console.log(`Inserted new user: ${user.username}`);
+      }
+    }
   } catch (err) {
     console.error('Error inserting users:', err);
   } finally {

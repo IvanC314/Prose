@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
 
     if (rating < 1 || rating > 5) {
         return NextResponse.json(
-            { error: "Rating must be a number between 1 and 5." },
+            { error: "Rating must be between 1 and 5." },
             { status: 400 }
         );
     }
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
         console.error("Error while posting data:", error);
         return NextResponse.json(
             { error: "An error occurred while saving the data." },
-            { status: 500 }
+            { status: 400 }
         );
     }
 }

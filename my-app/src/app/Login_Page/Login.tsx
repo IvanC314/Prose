@@ -5,7 +5,7 @@ import { IM_Fell_English_SC } from "next/font/google";
 import Button from "../Shared_Components/Button";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../AuthContext";
-import { useEffect } from "react";
+import { useState } from "react";
 
 const titleFont = IM_Fell_English_SC({
   subsets: ["latin"],
@@ -15,17 +15,39 @@ const titleFont = IM_Fell_English_SC({
 
 export default function Login() {
   const router = useRouter();
-  const { login, isLoggedIn } = useAuth();
+  const { login } = useAuth();
 
-  // Debug state changes in isLoggedIn
-  useEffect(() => {
-    console.log("isLoggedIn state changed:", isLoggedIn);
-  }, [isLoggedIn]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSignIn = () => {
-    console.log("Sign In button clicked");
-    login(); // Update global auth state
-    console.log("Redirecting to Home_Page...");
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.error || "Invalid login credentials.");
+      return;
+    }
+
+    // Assuming the API returns `username` and `user_id` after successful login
+    const { username: returnedUsername, user_id } = data;
+
+    login(returnedUsername, user_id); // Update auth context with username and user_id
+
+    // Debugging log to print out username and user_id
+    console.log("Login successful!");
+    console.log("Username:", returnedUsername);
+    console.log("User ID:", user_id);
+
     router.push("/Home_Page"); // Redirect to home page
   };
 
@@ -33,16 +55,38 @@ export default function Login() {
     <div className="login-container">
       <h1 className={`${titleFont.className} title-login`}>Prose</h1>
       <p className="text">LOG IN</p>
-      <label htmlFor="username" className="textboxLabel">
-        Username:
-      </label>
-      <input type="text" id="username" className="textbox" placeholder="Type..." />
-      <label htmlFor="password" className="textboxLabel">
-        Password:
-      </label>
-      <input type="password" id="password" className="textbox" placeholder="Type..." />
-      <p className="text">Forgot your password?</p>
-      <Button text="Sign In" onClick={handleSignIn} />
+
+      {error && <p className="error">{error}</p>}
+
+      <form onSubmit={handleSignIn}>
+        <label htmlFor="username" className="textboxLabel">
+          Username:
+        </label>
+        <input
+          type="text"
+          id="username"
+          className="textbox"
+          placeholder="Type..."
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <label htmlFor="password" className="textboxLabel">
+          Password:
+        </label>
+        <input
+          type="password"
+          id="password"
+          className="textbox"
+          placeholder="Type..."
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <p className="text">Forgot your password?</p>
+        <Button text="Sign In" />
+      </form>
+
       <Button text="Create an Account" targetPage="/Register_Page" />
     </div>
   );

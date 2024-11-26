@@ -4,7 +4,8 @@
     align-items: center;
     justify-content: center;
     padding: 5px;
-    background-color: rgba(34, 34, 34, 0.596);
+    background-color: rgba(34, 34, 34, 0.596); 
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;

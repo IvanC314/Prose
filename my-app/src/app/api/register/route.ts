@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     if (password.length < 6) {
         return NextResponse.json(
-            { error: "Password must be at least 6 characters long." },
+            { error: "Password must be at least 6 characters." },
             { status: 400 }
         );
     }
@@ -51,13 +51,13 @@ export async function POST(request: NextRequest) {
 
         return NextResponse.json(
             { message: "User registered successfully" },
-            { status: 201 }
+            { status: 200 }
         );
     } catch (error) {
         console.error("Error while registering user:", error);
         return NextResponse.json(
-            { error: "An error occurred while registering the user." },
-            { status: 500 }
+            { error: "An error occurred while registering." },
+            { status: 400 }
         );
     }
 }
