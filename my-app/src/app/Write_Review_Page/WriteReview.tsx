@@ -170,7 +170,7 @@ export default function WriteReview() {
             </ul>
           )}
 
-          <label htmlFor="imageUrl" className="textboxLabel">
+          {/* <label htmlFor="imageUrl" className="textboxLabel">
             Image URL:
           </label>
           <input
@@ -180,7 +180,18 @@ export default function WriteReview() {
             placeholder="URL will appear here..."
             value={formData.imageUrl}
             onChange={handleChange}
-          />
+          /> */}
+
+                {/* Render the image below the form */}
+            {formData.imageUrl && (
+                <div className="image-preview">
+                <img
+                    src={formData.imageUrl}
+                    alt="Book Cover"
+                    className="preview-image"
+                />
+                </div>
+            )}
 
           <label htmlFor="author" className="textboxLabel">
             Author:
@@ -238,13 +249,13 @@ export default function WriteReview() {
           </label>
           <textarea
             id="review"
-            className="textboxReview review-box"
+            className="textboxReview review-box-user"
             placeholder="Write your review here..."
             value={formData.review}
             onChange={handleChange}
           ></textarea>
 
-          <Button text="Post Review" targetPage="../Auth_Home_Page" />
+          <Button text="Post Review" targetPage="../Home_Page" />
         </div>
       </form>
     </div>

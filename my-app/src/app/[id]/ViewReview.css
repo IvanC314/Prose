@@ -39,6 +39,8 @@
 
 .view-book-image {
     width: 70%;
+    max-width: 200px; /* Increase image size */
+
 }
 
 .view-form-section {

@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import connectMongoDB from "@/libs/mongodb";
 import Item from "@/models/reviews";  // Review model
-import BookReview from "@/models/bookReviews";  // The linking model between books and reviews
+import UserReview from "@/models/userReviews";
+import BookReview from "@/models/bookReviews"; 
 import Book from "@/models/books";  // Book model
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
@@ -26,15 +27,6 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     console.log("book" + book);
     return NextResponse.json({ item: review, book }, { status: 200 });
 }
-
-
-// export async function PUT (request:NextRequest, {params}: RouteParams) {
-//     const {id} = params;
-//     const { title: title, description: description, image: image } = await request.json()
-//     await connectMongoDB();
-//     Item.findByIdAndUpdate (id, { title, description, image });
-//     return NextResponse.json({ message: "Item updated" }, { status: 200 });
-// }
 
 export async function PUT(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
@@ -61,16 +53,56 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
 
 
-export async function DELETE (request: NextRequest, {params}: RouteParams) { 
-    const {id} = params;
-    if (!mongoose. Types.ObjectId.isValid(id)) {
-        return NextResponse.json({ message: "Invalid ID format" },{ status: 400 });
-    }
-    await connectMongoDB();
-    const deletedItem = await Item.findByIdAndDelete(id);
-    if (!deletedItem) {
-        return NextResponse.json({ message: "Item not found" }, { status: 404 });
-    }
-    return NextResponse.json({ message: "Item deleted" }, { status: 200 });
-}
+// export async function DELETE (request: NextRequest, {params}: RouteParams) { 
+//     const {id} = params;
+//     if (!mongoose. Types.ObjectId.isValid(id)) {
+//         return NextResponse.json({ message: "Invalid ID format" },{ status: 400 });
+//     }
+//     await connectMongoDB();
+//     const deletedItem = await Item.findByIdAndDelete(id);
+//     if (!deletedItem) {
+//         return NextResponse.json({ message: "Item not found" }, { status: 404 });
+//     }
+//     return NextResponse.json({ message: "Item deleted" }, { status: 200 });
+// }
 
+export async function DELETE(request: NextRequest, { params }: RouteParams) {
+    const { id } = params;
+
+    // Validate ID format
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
+    }
+
+    await connectMongoDB();
+
+    try {
+        // Delete the review
+        const deletedItem = await Item.findByIdAndDelete(id);
+        if (!deletedItem) {
+            return NextResponse.json({ message: "Review not found" }, { status: 404 });
+        }
+
+        // Delete any references in userReviews
+        const deletedUserReviews = await UserReview.deleteMany({ review_id: id });
+
+        // Delete any references in bookReviews
+        const deletedBookReviews = await BookReview.deleteMany({ review_id: id });
+
+        // Return a success response
+        return NextResponse.json(
+            {
+                message: "Review and associated references deleted",
+                deletedItem,
+                deletedReferences: {
+                    userReviewsDeleted: deletedUserReviews.deletedCount,
+                    bookReviewsDeleted: deletedBookReviews.deletedCount,
+                },
+            },
+            { status: 200 }
+        );
+    } catch (error) {
+        console.error("Error deleting review:", error);
+        return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    }
+}

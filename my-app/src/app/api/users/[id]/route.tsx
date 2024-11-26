@@ -1,77 +1,105 @@
 
-// export async function GET() {
-//   const userId = "6744bf7009071684bf6f7cb9";
-  
-//   try {
-//     await connectMongoDB();
-
-//     if (!mongoose.Types.ObjectId.isValid(userId)) {
-//       return NextResponse.json({ error: "Invalid User ID format" }, { status: 400 });
-//     }
-
-//     const user = await User.findById(userId).select("email f_name l_name username"); // Fetch only required fields
-
-//     if (!user) {
-//       return NextResponse.json({ error: "User not found" }, { status: 404 });
-//     }
-
-//     return NextResponse.json(user, { status: 200 });
-//   } catch (error) {
-//     console.error("Error fetching user:", error);
-//     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
-//   }
-// }
-
-
 import mongoose from "mongoose";
 import connectMongoDB from "@/libs/mongodb";
-import User from "@/models/users";
+import User from "@/models/users"; 
 import Review from "@/models/reviews";
-import { NextResponse } from "next/server";
+import UserReview from "@/models/userReviews";
+import BookReview from "@/models/bookReviews";
+import Book from "@/models/books";
+import { NextRequest, NextResponse } from "next/server";
+import { useAuth } from "@/app/AuthContext";
 
-export async function GET() {
-  try {
-    const userId = "6744bf7009071684bf6f7cb9";
 
-    await connectMongoDB();
+interface RouteParams {
+    params: { id: string };
+}
 
-    // Fetch all users
-    const users = await User.find().select("email f_name l_name username");
+// RETURNS BOOK AND REVIEW DATA
+export async function GET(request: NextRequest, { params }: RouteParams) {
+    const { id } = params;
+    const userId = id;
+try {
+  await connectMongoDB();
 
-    // Fetch all reviews and populate the book information
-    const reviews = await Review.find()
-      .populate({
-        path: "book",
-        select: "title author genre img_url"
-      })
-      .exec();
-
-    // Combine user and review data
-    const userReviewData = users.map((user) => ({
-      user,
-      reviews: reviews
-        .filter((review) => String(review.user_id) === String(user._id)) // Match reviews with the user ID
-        .map((review) => ({
-          _id: review._id,
-          title: review.title,
-          rating: review.rating,
-          desc: review.desc,
-          upvotes: review.upvotes,
-          downvotes: review.downvotes,
-          book: review.book
-            ? {
-                title: review.book.title,
-                author: review.book.author,
-                genre: review.book.genre,
-                img_url: review.book.img_url,
-              }
-            : null,
-        })),
-    }));
-
-    return NextResponse.json(userReviewData, { status: 200 });
-  } catch (error) {
-    console.error("Error fetching user and review data:", error);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  // Validate the userId
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return NextResponse.json({ error: "Invalid User ID format" }, { status: 400 });
   }
+
+  // Fetch the user details
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  // Fetch all userReviews that match the userId
+  const userReviews = await UserReview.find({ user_id: userId }).select("review_id");
+
+  if (!userReviews.length) {
+    return NextResponse.json({
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        f_name: user.f_name,
+        l_name: user.l_name,
+      },
+      reviews: [],
+    }, { status: 200 });
+  }
+
+  // Extract review IDs from userReviews
+  const reviewIds = userReviews.map((ur) => ur.review_id);
+
+  // Fetch bookReview documents to get book IDs for the review IDs
+  const bookReviews = await BookReview.find({ review_id: { $in: reviewIds } }).select("book_id review_id");
+
+  const bookIdMap = new Map(); // Map to associate review_id -> book_id
+  bookReviews.forEach((br) => {
+    bookIdMap.set(br.review_id.toString(), br.book_id);
+  });
+
+  // Fetch reviews for the extracted IDs
+  const reviews = await Review.find({ _id: { $in: reviewIds } }).exec();
+
+  // Fetch books for the extracted book IDs
+  const bookIds = Array.from(bookIdMap.values());
+  const books = await Book.find({ _id: { $in: bookIds } }).select("title author genre img_url").exec();
+
+  const bookDataMap = new Map(); // Map to associate book_id -> book data
+  books.forEach((book) => {
+    bookDataMap.set(book._id.toString(), book);
+  });
+
+  // Construct the response object
+  const userReviewData = {
+    user: {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      f_name: user.f_name,
+      l_name: user.l_name,
+    },
+    reviews: reviews.map((review) => {
+      const bookId = bookIdMap.get(review._id.toString());
+      const book = bookDataMap.get(bookId?.toString());
+
+      return {
+        _id: review._id,
+        title: review.title,
+        rating: review.rating,
+        desc: review.desc,
+        upvotes: review.upvotes,
+        downvotes: review.downvotes,
+        book: book || null,
+      };
+    }),
+  };
+
+  return NextResponse.json(userReviewData, { status: 200 });
+} catch (error) {
+  console.error("Error fetching user and review data:", error);
+  return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+}
 }

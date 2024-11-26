@@ -16,9 +16,6 @@ const titleFont = IM_Fell_English_SC({
 
 export default function Header() {
   const { isLoggedIn, logout, username, user_id } = useAuth(); // Get auth state and logout function
-//   const [isDropdownOpen, setDropdownOpen] = useState(false); // State for dropdown menu
-//   const isLoggedIn = true; // Hardcoded login state
-//   const username = "JohnDoe123"; // Hardcoded username for now
   const [isDropdownOpen, setDropdownOpen] = useState(false); // State for genre dropdown menu
   const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); // State for username dropdown menu
   const userDropdownRef = useRef<HTMLDivElement | null>(null); // Ref for the username dropdown

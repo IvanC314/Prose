@@ -8,6 +8,5 @@ const userReviewSchema = new Schema({
   collection: 'userReviews'  // Corrected collection name
 });
 
-const UserReview = mongoose.model('userReviews', userReviewSchema); // Corrected model name
 
-module.exports = UserReview;
+module.exports = mongoose.models.userReviews || mongoose.model("userReviews", userReviewSchema);
