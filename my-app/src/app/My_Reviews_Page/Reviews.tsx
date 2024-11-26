@@ -1,72 +1,25 @@
-// 'use client';
-
-// import './Reviews.css';
-// import MyReviewCard from './MyReviewCard';
-// import { useEffect, useState } from 'react';
-
-// export default function Reviews() {
-//     const [reviews, setReviews] = useState<any[]>([]);
-
-//     useEffect(() => {
-//         const fetchReviews = async () => {
-//             try {
-//                 const response = await fetch('/api/reviews');
-//                 const data = await response.json();
-//                 console.log(data);
-//                 setReviews(data);
-//             } catch (error) {
-//                 console.error("Failed to fetch reviews:", error);
-//             }
-//         };
-
-//         fetchReviews();
-//     }, []);
-
-//     return (
-//         <div className='review-center'>
-//             <div className='reviews-container'>
-//                 {reviews.map((review, index) => (
-//                     <MyReviewCard
-//                         id ={review._id}
-//                         key={index}
-//                         stars={"⭐".repeat(review.rating)}
-//                         reviewTitle={review.title}                        
-//                         reviewAuthor={review.reviewAuthor}
-//                         bookImage={review.bookImage}
-//                         bookTitle={review.bookTitle}
-//                         bookAuthor={review.bookAuthor}
-//                         upvotes={review.upvotes}
-//                         downvotes={review.downvotes}
-//                     />
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// }
-
-
-'use client';
 import './Reviews.css';
 import MyReviewCard from './MyReviewCard';
 import { useEffect, useState } from 'react';
 import { useAuth } from "@/app/AuthContext";
 
 export default function Reviews() {
-    const { user_id, isLoggedIn } = useAuth(); 
+    const { user_id } = useAuth(); 
     const [reviews, setReviews] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/users/${user_id}`);
-                const data = await response.json();
+                const res = await fetch(`http://localhost:3000/api/users/${user_id}`, {
+                    cache: 'no-store',
+                });
+                const data = await res.json();
 
-                // Transform the data to match MyReviewCard props structure
                 const formattedReviews = data.reviews.map((review: any) => ({
                     id: review._id,
                     stars: "⭐".repeat(review.rating),
                     reviewTitle: review.title,
-                    reviewAuthor: `${data.user.f_name} ${data.user.l_name}`, // Assuming user info is consistent for all reviews
+                    reviewAuthor: `${data.user.f_name} ${data.user.l_name}`,
                     bookImage: review.book.img_url,
                     bookTitle: review.book.title,
                     bookAuthor: review.book.author,
@@ -81,12 +34,17 @@ export default function Reviews() {
         };
 
         fetchReviews();
-    }, []);
+    }, [user_id]); // Dependency on user_id, re-fetch if user_id changes
+
+    const handleDelete = (id: string) => {
+        // Remove the deleted review from the state
+        setReviews((prevReviews) => prevReviews.filter((review) => review.id !== id));
+    };
 
     return (
         <div className='review-center'>
             <div className='reviews-container'>
-                {reviews.map((review, index) => (
+            {reviews.map((review, index) => (
                     <MyReviewCard
                         id={review.id}
                         key={index}
@@ -98,6 +56,7 @@ export default function Reviews() {
                         bookAuthor={review.bookAuthor}
                         upvotes={review.upvotes}
                         downvotes={review.downvotes}
+                        handleDelete={handleDelete} 
                     />
                 ))}
             </div>
