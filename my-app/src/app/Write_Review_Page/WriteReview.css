@@ -1,5 +1,6 @@
 
   .book-background {
+    margin-top: 50px;
     background-image: url('../images/OpenBook2.png');
     background-size: cover;
     background-repeat: no-repeat;
@@ -12,7 +13,7 @@
 
   
   .page-container {
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -94,3 +95,13 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
+  .suggestion-item {
+    color: black;
+    border: 1px solid inset;
+  }
+
+  .suggestion-item:hover {
+    color: black;
+    border: 1px solid inset;
+    cursor: pointer;
+  }

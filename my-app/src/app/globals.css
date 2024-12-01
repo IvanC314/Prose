@@ -1,17 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap');
+
+html {
+    font-family: "Monsieur La Doulaise", cursive !important;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 body {
@@ -21,13 +26,23 @@ body {
 
     /* Dark wood background */
     background-image: url('./images/DarkWood.jpg');
-    background-size: 100% auto; 
-    background-repeat: repeat-y; 
+    background-size: 100% auto;
+    background-repeat: repeat-y;
 
+    transition: font-family 0.5s ease-in-out;
 }
 
+.monsieur-class {
+    font-family: "Monsieur La Doulaise", cursive !important;
+}
+
+
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+html {
+    @apply font-sans;
 }

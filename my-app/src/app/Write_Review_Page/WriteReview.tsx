@@ -2,15 +2,18 @@
 // import React, { useState } from "react";
 // import "./WriteReview.css";
 // import Button from "../Shared_Components/Button";
+// import { useAuth } from "@/app/AuthContext";
 
 // interface BookSuggestion {
 //   title: string;
-//   author_name?: string[]; 
-//   isbn?: string[]; 
-//   key?: string; 
+//   author_name?: string[];
+//   isbn?: string[];
+//   key?: string;
 // }
 
 // export default function WriteReview() {
+//   const { user_id, isLoggedIn } = useAuth();  // Destructure user_id and isLoggedIn
+
 //   const [formData, setFormData] = useState({
 //     title: "",
 //     imageUrl: "",
@@ -23,6 +26,7 @@
 
 //   const [suggestions, setSuggestions] = useState<BookSuggestion[]>([]);
 
+//   // Handle changes to form inputs
 //   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 //     const { id, value } = e.target;
 //     setFormData((prevData) => ({
@@ -37,6 +41,7 @@
 //     }
 //   };
 
+//   // Fetch book suggestions from Open Library API based on the title
 //   const fetchBookSuggestions = async (searchTerm: string) => {
 //     try {
 //       const response = await fetch(
@@ -49,21 +54,23 @@
 //     }
 //   };
 
+//   // Fetch book description from Open Library API using the work key
 //   const fetchBookDescription = async (workKey: string | undefined) => {
 //     if (!workKey) return "No description available.";
 
 //     try {
 //       const response = await fetch(`https://openlibrary.org${workKey}.json`);
 //       const data = await response.json();
-//       return data.description?.value || "No description available."; 
+//       return data.description?.value || "No description available.";
 //     } catch (error) {
 //       console.error("Error fetching book description:", error);
 //       return "Error fetching description.";
 //     }
 //   };
 
+//   // Handle book suggestion click
 //   const handleSuggestionClick = async (book: BookSuggestion) => {
-//     const description = await fetchBookDescription(book.key); 
+//     const description = await fetchBookDescription(book.key);
 
 //     setFormData((prevData) => ({
 //       ...prevData,
@@ -72,17 +79,19 @@
 //       imageUrl: book.isbn
 //         ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-L.jpg`
 //         : "",
-//       description, 
+//       description,
 //     }));
 //     setSuggestions([]);
 //   };
 
+//   // Prevent form submission on "Enter" key
 //   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
 //     if (e.key === "Enter") {
 //       e.preventDefault();
 //     }
 //   };
 
+//   // Handle form submission
 //   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 //     e.preventDefault();
 //     console.log("Form Data Submitted:", formData);
@@ -91,11 +100,12 @@
 //       title: formData.reviewTitle,
 //       rating: parseInt(formData.stars, 10),
 //       desc: formData.review,
+//       user_id, // Add user_id here
 //       book: {
 //         title: formData.title,
 //         author: formData.author,
-//         genre: ["Example Genre"],
-//         desc: formData.review,
+//         genre: ["Example Genre"], // You can replace this with actual genre
+//         desc: formData.description,
 //         img_url: formData.imageUrl,
 //       },
 //     };
@@ -114,6 +124,9 @@
 //       const response = await fetch("/api/reviews", {
 //         method: "POST",
 //         body: JSON.stringify(reviewData),
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
 //       });
 
 //       if (response.ok) {
@@ -170,15 +183,15 @@
 //             </ul>
 //           )}
 
-//             {formData.imageUrl && (
-//                 <div className="image-preview">
-//                 <img
-//                     src={formData.imageUrl}
-//                     alt="Book Cover"
-//                     className="preview-image"
-//                 />
-//                 </div>
-//             )}
+//           {formData.imageUrl && (
+//             <div className="image-preview">
+//               <img
+//                 src={formData.imageUrl}
+//                 alt="Book Cover"
+//                 className="preview-image"
+//               />
+//             </div>
+//           )}
 
 //           <label htmlFor="author" className="textboxLabel">
 //             Author:
@@ -242,17 +255,19 @@
 //             onChange={handleChange}
 //           ></textarea>
 
-//           <Button text="Post Review"/>
+//           <Button text="Post Review" />
 //         </div>
 //       </form>
 //     </div>
 //   );
 // }
+
 "use client";
 import React, { useState } from "react";
 import "./WriteReview.css";
 import Button from "../Shared_Components/Button";
 import { useAuth } from "@/app/AuthContext";
+import { monsieurClass } from "../styles/fontSwitcher"; // Import monsieur class
 
 interface BookSuggestion {
   title: string;
@@ -275,6 +290,9 @@ export default function WriteReview() {
   });
 
   const [suggestions, setSuggestions] = useState<BookSuggestion[]>([]);
+  const { exquisiteToggle, toggleExquisiteMode } = useAuth(); // Access AuthContext
+
+  const fontClass = exquisiteToggle ? monsieurClass : ''; // Conditional class based on exquisiteToggle
 
   // Handle changes to form inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -401,18 +419,18 @@ export default function WriteReview() {
   return (
     <div className="book-background">
       <form
-        className="page-container"
+        className={`page-container ${fontClass}`} // Apply fontClass to form container
         onSubmit={handleSubmit}
         onKeyDown={handleKeyDown}
       >
         <div className="form-section left-section">
-          <label htmlFor="title" className="textboxLabel">
+          <label htmlFor="title" className={`textboxLabel ${fontClass}`}>
             Title:
           </label>
           <input
             type="text"
             id="title"
-            className="textboxReview"
+            className={`textboxReview ${fontClass}`} // Apply fontClass to input fields
             placeholder="Enter Book Title"
             value={formData.title}
             onChange={handleChange}
@@ -424,7 +442,7 @@ export default function WriteReview() {
                 <li
                   key={index}
                   onClick={() => handleSuggestionClick(book)}
-                  className="suggestion-item"
+                  className='suggestion-item' // Apply fontClass to suggestion items
                 >
                   {book.title} -{" "}
                   {book.author_name ? book.author_name.join(", ") : "Unknown"}
@@ -443,24 +461,24 @@ export default function WriteReview() {
             </div>
           )}
 
-          <label htmlFor="author" className="textboxLabel">
+          <label htmlFor="author" className={`textboxLabel ${fontClass}`}>
             Author:
           </label>
           <input
             type="text"
             id="author"
-            className="textboxReview"
+            className={`textboxReview ${fontClass}`} // Apply fontClass to input fields
             placeholder="Author will appear here..."
             value={formData.author}
             onChange={handleChange}
           />
 
-          <label htmlFor="description" className="textboxLabel">
+          <label htmlFor="description" className={`textboxLabel ${fontClass}`}>
             Book Description:
           </label>
           <textarea
             id="description"
-            className="textboxReview review-box"
+            className={`textboxReview review-box ${fontClass}`} // Apply fontClass to textarea
             placeholder="Book description will appear here..."
             value={formData.description}
             readOnly
@@ -468,25 +486,25 @@ export default function WriteReview() {
         </div>
 
         <div className="form-section right-section">
-          <label htmlFor="reviewTitle" className="textboxLabel">
+          <label htmlFor="reviewTitle" className={`textboxLabel ${fontClass}`}>
             Review Title:
           </label>
           <input
             type="text"
             id="reviewTitle"
-            className="textboxReview"
+            className={`textboxReview ${fontClass}`}
             placeholder="Enter Review Title"
             value={formData.reviewTitle}
             onChange={handleChange}
           />
 
-          <label htmlFor="stars" className="textboxLabel">
+          <label htmlFor="stars" className={`textboxLabel ${fontClass}`}>
             Stars:
           </label>
           <input
             type="number"
             id="stars"
-            className="textboxReview"
+            className={`textboxReview ${fontClass}`}
             placeholder="Stars..."
             value={formData.stars}
             onChange={handleChange}
@@ -494,12 +512,12 @@ export default function WriteReview() {
             min="1"
           />
 
-          <label htmlFor="review" className="textboxLabel">
+          <label htmlFor="review" className={`textboxLabel ${fontClass}`}>
             Write Review:
           </label>
           <textarea
             id="review"
-            className="textboxReview review-box-user"
+            className={`textboxReview review-box-user ${fontClass}`}
             placeholder="Write your review here..."
             value={formData.review}
             onChange={handleChange}

@@ -23,11 +23,11 @@
     display: block;
     object-fit: cover;
     margin-bottom: 20px;
-    border: 3px solid rgb(175, 36, 126);
+    border: 5px solid rgb(175, 36, 126);
 }
 
 .account-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     margin-bottom: 20px;
     color: rgb(175, 36, 126);
     text-align: center;
@@ -102,4 +102,3 @@
   #profile-image-upload {
     display: none; /* Hidden file input */
   }
-  
