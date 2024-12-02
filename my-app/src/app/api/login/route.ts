@@ -33,7 +33,6 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Send user data (username and user_id) in the response
         return NextResponse.json(
             { message: "Login successful.", username: user.username, user_id: user._id },
             { status: 200 }
@@ -42,7 +41,7 @@ export async function POST(request: NextRequest) {
     } catch (error) {
         console.error("Error during login:", error);
         return NextResponse.json(
-            { error: "An error occurred during login process." },
+            { error: "An error occurred during login." },
             { status: 400 }
         );
     }
