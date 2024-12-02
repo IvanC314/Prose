@@ -48,6 +48,7 @@ export default function Header() {
 
   const handleLogout = () => {
     console.log("Logged out!");
+    logout();
     // Simulate logging out
     window.location.href = "/"; // Redirect to the home page
   };
