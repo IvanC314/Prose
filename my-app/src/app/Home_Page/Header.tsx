@@ -6,6 +6,7 @@ import Button from "../Shared_Components/Button";
 import { IM_Fell_English_SC } from "next/font/google";
 import GenreButton from "./GenreButton";
 import { useAuth } from "../AuthContext";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const titleFont = IM_Fell_English_SC({
@@ -19,6 +20,8 @@ export default function Header() {
   const [isDropdownOpen, setDropdownOpen] = useState(false); // State for genre dropdown menu
   const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); // State for username dropdown menu
   const userDropdownRef = useRef<HTMLDivElement | null>(null); // Ref for the username dropdown
+  const router = useRouter();
+
 
   const genres = [
     "Fantasy",
@@ -50,7 +53,7 @@ export default function Header() {
     console.log("Logged out!");
     logout();
     // Simulate logging out
-    window.location.href = "/"; // Redirect to the home page
+    router.push("/"); // Safely use the router here
   };
 
   // Close the user dropdown when clicking outside of it

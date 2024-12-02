@@ -4,6 +4,7 @@ import './Register.css';
 import { IM_Fell_English_SC } from 'next/font/google';
 import Button from '../Shared_Components/Button';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const titleFont = IM_Fell_English_SC({
   subsets: ['latin'],
@@ -19,6 +20,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter(); 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +36,9 @@ export default function Register() {
 
     if (!response.ok) {
       setError(data.error);
+    } else {
+        alert("Registered. Redirecting to login page");
+        router.push('/');
     }
   };
 

@@ -23,7 +23,7 @@
 }
 
 /* Basic styling for header */
-header {
+.w-header {
     margin-top: 20px;
     padding: 20px;
     display: flex;
@@ -32,7 +32,7 @@ header {
 }
 
 /* Title container is now inside the flex layout */
-.title-container {
+.w-title-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -47,7 +47,7 @@ header {
 }
 
 /* Title styling */
-.title {
+.w-title {
     margin: 0;
     font-size: 4rem;
 }

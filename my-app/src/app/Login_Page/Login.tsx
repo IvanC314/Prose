@@ -1,195 +1,110 @@
-// "use client";
-
-// import "./Login.css";
-// import { IM_Fell_English_SC } from "next/font/google";
-// import Button from "../Shared_Components/Button";
-// import { useRouter } from "next/navigation";
-// import { useAuth } from "../AuthContext";
-// import { useState } from "react";
-
-// const titleFont = IM_Fell_English_SC({
-//   subsets: ["latin"],
-//   weight: ["400"],
-//   adjustFontFallback: false,
-// });
-
-// export default function Login() {
-//   const router = useRouter();
-//   const { login } = useAuth();
-
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-
-//   const handleSignIn = async (e: React.FormEvent) => {
-//     e.preventDefault();
-//     setError("");
-
-//     const response = await fetch("/api/login", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ username, password }),
-//     });
-
-//     const data = await response.json();
-
-//     if (!response.ok) {
-//       setError(data.error || "Invalid login credentials.");
-//       return;
-//     }
-
-//     // Assuming the API returns `username` and `user_id` after successful login
-//     const { username: returnedUsername, user_id } = data;
-
-//     login(returnedUsername, user_id); // Update auth context with username and user_id
-
-//     // Debugging log to print out username and user_id
-//     console.log("Login successful!");
-//     console.log("Username:", returnedUsername);
-//     console.log("User ID:", user_id);
-
-//     router.push("/Home_Page"); // Redirect to home page
-//   };
-
-//   return (
-//     <div className="login-container">
-//       <h1 className={`${titleFont.className} title-login`}>Prose</h1>
-//       <p className="text">LOG IN</p>
-
-//       {error && <p className="error">{error}</p>}
-
-//       <form onSubmit={handleSignIn}>
-        
-//         <label htmlFor="username" className="textboxLabel">
-//           Username:
-//         </label>
-//         <input
-//           type="text"
-//           id="username"
-//           className="textbox"
-//           placeholder="Type..."
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//         />
-
-//         <label htmlFor="password" className="textboxLabel">
-//           Password:
-//         </label>
-//         <input
-//           type="password"
-//           id="password"
-//           className="textbox"
-//           placeholder="Type..."
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//         />
-
-//         <p className="text">Forgot your password?</p>
-//         <Button text="Sign In" />
-//       </form>
-
-//       <Button text="Create an Account" targetPage="/Register_Page" />
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { IM_Fell_English_SC } from "next/font/google";
 import Button from "../Shared_Components/Button";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../AuthContext";
-import { useState } from "react";
-import { signIn } from "next-auth/react";  
+import { useState, useEffect } from "react";
+import { signIn } from "next-auth/react";
+import "./Login.css";
 
 const titleFont = IM_Fell_English_SC({
-  subsets: ["latin"],
-  weight: ["400"],
-  adjustFontFallback: false,
+    subsets: ["latin"],
+    weight: ["400"],
+    adjustFontFallback: false,
 });
 
 export default function Login() {
-  const router = useRouter();
-  const { login } = useAuth();
+    const router = useRouter();
+    const { isLoggedIn, user_id, login } = useAuth();  // Destructure isLoggedIn and user_id from context
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+    useEffect(() => {
+        // If the user is already logged in and has a valid user_id, redirect to the home page
+        if (isLoggedIn && user_id) {
+            alert("Logged in. Redirecting to home page.");
+            router.push("/");
+        }
+    }, [isLoggedIn, user_id, router]);
 
-    // call api to validate
-    const response = await fetch("/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
+    const handleSignIn = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError("");
 
-    const data = await response.json();
+        // Validate the credentials with your API
+        const response = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+        });
 
-    if (!response.ok) {
-      setError(data.error || "Invalid login credentials.");
-      return;
-    }
+        const data = await response.json();
 
-    // use nextauth.js to login after validation
-    const { username: returnedUsername, user_id } = data;
+        if (!response.ok) {
+            setError(data.error || "Invalid login credentials.");
+            return;
+        }
 
-    const result = await signIn("credentials", {
-      redirect: false,
-      username: returnedUsername,
-      password,
-    });
+        // Login via next-auth after validation
+        const { username: returnedUsername, user_id } = data;
 
-    if (result?.error) {
-      setError("Login failed. Please try again.");
-      return;
-    }
+        const result = await signIn("credentials", {
+            redirect: false,
+            username: returnedUsername,
+            password,
+        });
 
-    login(returnedUsername, user_id); 
-    router.push("/Home_Page");  //redirect after successful login 
-  };
+        if (result?.error) {
+            setError("Login failed. Please try again.");
+            return;
+        }
 
-  return (
-    <div className="login-container">
-      <h1 className={`${titleFont.className} title-login`}>Prose</h1>
-      <p className="text">LOG IN</p>
+        // On successful login, update the AuthContext and redirect
+        login(returnedUsername, user_id);
+        router.push("/");  // Redirect to home page
+    };
 
-      {error && <p className="error">{error}</p>}
+    return (
+        <div className="login-container">
+            <h1 className={`${titleFont.className} title-login`}>Prose</h1>
+            <p className="text">LOG IN</p>
 
-      <form onSubmit={handleSignIn}>
-        
-        <label htmlFor="usernamae" className="textboxLabel">
-          Username:
-        </label>
-        <input
-          type="text"
-          id="username"
-          className="textbox"
-          placeholder="Type..."
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+            {error && <p className="error">{error}</p>}
 
-        <label htmlFor="password" className="textboxLabel">
-          Password:
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="textbox"
-          placeholder="Type..."
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+            <form onSubmit={handleSignIn}>
 
-        <p className="text">Forgot your password?</p>
-        <Button text="Sign In" />
-      </form>
+                <label htmlFor="username" className="textboxLabel">
+                    Username:
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    className="textbox"
+                    placeholder="Type..."
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
 
-      <Button text="Create an Account" targetPage="/Register_Page" />
-    </div>
-  );
+                <label htmlFor="password" className="textboxLabel">
+                    Password:
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    className="textbox"
+                    placeholder="Type..."
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <p className="text">Forgot your password?</p>
+                <Button text="Sign In" />
+            </form>
+
+            <Button text="Create an Account" targetPage="/Register_Page" />
+        </div>
+    );
 }
