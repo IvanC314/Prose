@@ -1,15 +1,19 @@
-.book-background {
-    background-image: url('../images/OpenBook.png');
+
+  .book-background {
+    margin-top: 50px;
+    background-image: url('../images/OpenBook2.png');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100% auto;
-  }
+    min-height: 100vh; 
+    width: 100%; 
+}
+
   
   .page-container {
-    margin-top: 100px;
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -18,7 +22,7 @@
     padding: 20px;
     background-color: rgba(195, 195, 195, 0);
     border-radius: 10px;
-    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    font-family: Georgia, serif;
 
   }
   
@@ -26,7 +30,7 @@
     width: 45%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
   }
   
   .left-section {
@@ -66,7 +70,38 @@
   }
   
   .review-box {
-    height: 250px;
+    height: 180px;
+    resize: none;
+  }
+
+  .review-box-user {
+    height: 400px;
     resize: none;
   }
     
+    
+  .image-preview {
+    margin-top: 5px;
+    display: flex;
+    text-align: center; 
+    justify-content: center;
+  }
+  
+  .preview-image {
+    max-width: 200px;
+    height: auto;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .suggestion-item {
+    color: black;
+    border: 1px solid inset;
+  }
+
+  .suggestion-item:hover {
+    color: black;
+    border: 1px solid inset;
+    cursor: pointer;
+  }

@@ -1,23 +1,97 @@
-.title {
+
+
+.white-button {
     display: inline-block;
-    padding: 20px;
-    font-size: 5rem;
-    color: #FFFFFF;
-    margin: 10px 10px 10px 10px;
+    padding: 10px 20px;
+    margin: 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    border: 2px solid black; /* Adds a border to make it more distinct */
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-family: Georgia, serif;
 }
-  
-/* GENRE BUTTON AND TITLE TOGETHER */
-.title-container {
-    display: flex; 
+
+.white-button:hover {
+    background-color: #f0f0f0; /* Slightly darker white background on hover */
+    border-color: #888; /* Darken the border on hover */
+}
+
+/* Basic styling for header */
+header {
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; /* Space between left and right sections */
     align-items: center;
+}
+
+/* Title container is now inside the flex layout */
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+/* Left section for HomeButton and title */
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Add space between HomeButton and title */
+}
+
+/* Title styling */
+.title {
+    margin: 0;
+    font-size: 4rem;
+}
+
+/* Button container for buttons aligned to the right */
+.button-container {
+    display: flex;
     gap: 10px;
 }
 
-header 
-{    
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 30px; 
-    height: 100px;
+/* Styling for the buttons */
+.white-button, .button {
+    padding: 10px 20px;
+    background-color: #c4c4c4;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    
+}
+
+.white-button:hover, .button:hover {
+    background-color: #9f9f9f;
+}
+
+/* Ensure the background GIF stays behind content */
+.exquisite-gif {
+    position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 30%; /* You can adjust the size or use specific dimensions */
+    z-index: -1; /* This places the GIF behind the content */
+    pointer-events: none; /* Prevents the GIF from interacting with mouse events */
+    object-fit: cover; /* Ensures the GIF covers the container without stretching */
+    opacity: .8;
+}
+
+/* Additional styles for other components */
+.title-container {
+    position: relative;
+    z-index: 10; /* Ensure the content is above the GIF */
+}
+
+.left-section, .button-container {
+    position: relative;
+    z-index: 10; /* Ensure buttons and text stay above the GIF */
 }

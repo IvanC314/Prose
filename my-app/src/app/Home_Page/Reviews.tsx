@@ -1,53 +1,51 @@
-/* BODY THAT CONTAINS ALL THE REVIEW CARDS */
+// Home_Screen/Reviews.tsx
+'use client';
 
 import './Reviews.css';
 import ReviewCard from './ReviewCard';
-import testHarry from '../images/testHarry.jpg';
-import testAnimal from '../images/testAnimal.jpg';
-import testAA from '../images/testAA.jpg';
+import { useEffect, useState } from 'react';
 
-const reviews = [
-    {
-        stars: '⭐⭐⭐⭐⭐',
-        reviewTitle: 'Amazing Book!',
-        reviewAuthor: 'johndoe13',
-        bookImage: testHarry.src,
-        bookTitle: 'Harry Potter',
-        bookAuthor: 'J.K. Rowling',
-    },
-    {
-        stars: '⭐⭐⭐⭐',
-        reviewTitle: 'Thought-provoking',
-        reviewAuthor: 'janesmith101',
-        bookImage: testAnimal.src,
-        bookTitle: 'Animal Farm',
-        bookAuthor: 'George Orwell',
-    },
-    {
-        stars: '⭐',
-        reviewTitle: 'Absolute Dog-water',
-        reviewAuthor: 'thejackdaniel',
-        bookImage: testAA.src,
-        bookTitle: 'Alcoholics Anonymous',
-        bookAuthor: 'Bill W.',
-    },
-];
+interface ReviewsProps {
+    reviewsData?: any[]; // Optional prop to pass pre-filtered reviews
+}
 
-export default function Reviews() {
+export default function Reviews({ reviewsData }: ReviewsProps) {
+    const [reviews, setReviews] = useState<any[]>(reviewsData || []);
+
+    useEffect(() => {
+        if (!reviewsData) { // If reviewsData is not passed, fetch reviews
+            const fetchReviews = async () => {
+                try {
+                    const response = await fetch('/api/reviews');
+                    const data = await response.json();
+                    console.log(data);  // Log the fetched data to check its structure
+                    setReviews(data);
+                } catch (error) {
+                    console.error("Failed to fetch reviews:", error);
+                }
+            };
+
+            fetchReviews();
+        }
+    }, [reviewsData]);
 
     return (
         <div className='review-center'>
-            <h2 className="featured-reviews-header">Featured Reviews</h2>
+            {/* Only display Featured Reviews on the home page */}
+            {!reviewsData && <h2 className="featured-reviews-header">Featured Reviews</h2>}
             <div className='reviews-container'>
                 {reviews.map((review, index) => (
                     <ReviewCard
+                        id={review._id}
                         key={index}
-                        stars={review.stars}
-                        reviewTitle={review.reviewTitle}                        
+                        stars={"⭐".repeat(review.rating)}
+                        reviewTitle={review.title}                        
                         reviewAuthor={review.reviewAuthor}
                         bookImage={review.bookImage}
                         bookTitle={review.bookTitle}
                         bookAuthor={review.bookAuthor}
+                        upvotes={review.upvotes}
+                        downvotes={review.downvotes}
                     />
                 ))}
             </div>

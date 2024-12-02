@@ -1,0 +1,170 @@
+.review-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    background-color: rgba(171, 171, 171, 0.596);
+    border-radius: 10px;
+    text-align: center;
+    cursor:pointer;
+}
+
+.review-container:hover{
+    background-color:  rgb(175, 36, 126);
+}
+
+.review-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: whitesmoke;
+    position: relative;
+    padding: 20px;
+    padding-bottom: 15px;
+    text-align: center;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+}
+
+.review-title::before {
+    content: '“'; 
+    font-size: 3rem;
+    color: rgb(195, 175, 175); 
+    position: absolute;
+    top: 5px; 
+    font-family: "Merriweather", serif;
+}
+
+.review-title::after {
+    content: '”';  
+    font-size: 3rem;
+    color: rgb(195, 175, 175); 
+    position: absolute;
+    top: 5px; 
+    font-family: "Merriweather", serif;
+}
+
+.review-title::before {
+    left: -15px;  
+}
+
+.review-title::after {
+    right: -15px; 
+}
+
+.review-author {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.05rem;
+    color: whitesmoke;
+    text-align: center;
+    position: relative;
+    padding-left: 20px; 
+    padding-bottom: 5px;
+}
+
+.review-author::before {
+    content: '-';  
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.2rem; 
+    color: whitesmoke; 
+    position: absolute;
+    left: 0; 
+    top: 50%;
+    transform: translateY(-60%); 
+}
+
+.stars {
+    font-size: 2rem;
+    margin-top: px;
+}
+
+.book-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    padding: 10px 30px;
+    margin-bottom: 5px;
+}
+
+.book-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+}
+
+.book-author {
+    font-size: 1rem;
+    color: #ffffff;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    padding-bottom: 10px;
+}
+
+.upvote-downvote-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.vote-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+}
+
+.upvote {
+    color:rgb(0, 255, 0);
+}
+
+.downvote {
+    color:rgb(255, 0, 0);
+}
+
+.review-card-container {
+    background-color: rgba(34, 34, 34, 0.596); 
+    padding: 10px;
+    border-radius: 12px;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Adjusted button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Button styles */
+.edit-button, .delete-button {
+    padding: 8px 16px;
+    font-size: 1rem;
+    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button {
+    background-color: rgb(50, 150, 255); /* Blue for edit */
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: rgb(30, 120, 220);
+}
+
+.delete-button {
+    background-color: rgb(255, 50, 50); /* Red for delete */
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: rgb(220, 30, 30);
+}

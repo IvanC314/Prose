@@ -2,7 +2,7 @@
     display: inline-block;
     padding: 10px 20px;
     margin: 20px;
-    font-size: 1.5rem; 
+    font-size: 1.3rem; 
     font-weight: bold; 
     color: white;
     background-color: #A02274;
@@ -12,7 +12,7 @@
     text-decoration: none; 
     cursor: pointer; 
     transition: background-color 0.3s ease;
-    font-family: "Palatino", "Palatino Linotype", "Book Antiqua", serif;
+    font-family: Georgia, serif;
 }
 
 .pink-button:hover {
