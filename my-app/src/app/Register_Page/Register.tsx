@@ -3,8 +3,9 @@
 import './Register.css';
 import { IM_Fell_English_SC } from 'next/font/google';
 import Button from '../Shared_Components/Button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const titleFont = IM_Fell_English_SC({
   subsets: ['latin'],
@@ -13,6 +14,7 @@ const titleFont = IM_Fell_English_SC({
 });
 
 export default function Register() {
+  const { data: session, status } = useSession();
   const [f_name, setFName] = useState('');
   const [l_name, setLName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,7 +22,22 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [notification, setNotification] = useState('');
   const router = useRouter(); 
+
+  useEffect(() => {
+    if (status === "loading") {
+      return;
+    }
+    if (session) {
+      setNotification("User already logged in. Redirecting to home page...");
+      const delayRedirect = setTimeout(() => {
+        router.push('/');
+      }, 1500); 
+
+      return () => clearTimeout(delayRedirect);
+    }
+  }, [session, status, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,6 +67,7 @@ export default function Register() {
       <p className="text-register">Register</p>
 
       {error && <p className="error">{error}</p>}
+      {notification && <p className="notification">{notification}</p>}
 
       <form onSubmit={handleSubmit}>
         <div className="name-container">

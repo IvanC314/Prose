@@ -6,11 +6,30 @@ import Button from "../Shared_Components/Button";
 import "./MyReviews.css";
 import Reviews from "./Reviews";
 import { useAuth } from "../AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function MyReviews() {
   const { isLoggedIn, username, logout } = useAuth(); 
   const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); 
   const userDropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!isLoggedIn) {
+        console.log("User not logged in. Redirecting to home page...");
+        window.location.href = "/";
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    console.log("isLoggedIn:", isLoggedIn);
+    console.log("username:", username);
+  }, [isLoggedIn, username]);
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!isUserDropdownOpen);
@@ -18,7 +37,8 @@ export default function MyReviews() {
 
   const handleLogout = () => {
     console.log("Logged out!");
-    window.location.href = "/";
+    logout();
+    router.push("/"); 
   };
 
   useEffect(() => {
