@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import "./WriteReview.css";
 import Button from "../Shared_Components/Button";
 import { useAuth } from "@/app/AuthContext";
-import { useRouter } from "next/navigation"; // Import useRouter for redirection
-import { monsieurClass } from "../styles/fontSwitcher"; // Import monsieur class
+import { useRouter } from "next/navigation"; 
+import { monsieurClass } from "../styles/fontSwitcher"; 
 
 interface BookSuggestion {
     title: string;
@@ -14,8 +14,8 @@ interface BookSuggestion {
 }
 
 export default function WriteReview() {
-    const { user_id, isLoggedIn } = useAuth();  // Destructure user_id and isLoggedIn
-    const router = useRouter(); // Initialize router for redirection
+    const { user_id, isLoggedIn } = useAuth();  
+    const router = useRouter(); 
 
     const [formData, setFormData] = useState({
         title: "",
@@ -28,12 +28,12 @@ export default function WriteReview() {
     });
 
     const [suggestions, setSuggestions] = useState<BookSuggestion[]>([]);
-    const { exquisiteToggle, toggleExquisiteMode } = useAuth(); // Access AuthContext
+    const { exquisiteToggle, toggleExquisiteMode } = useAuth(); 
 
-    // Conditional class based on exquisiteToggle
+    
     const fontClass = exquisiteToggle ? monsieurClass : '';
 
-    // Redirect if user is not logged in or user_id is null
+    
     useEffect(() => {
         if (!isLoggedIn || !user_id) {
             alert("You must be logged in to write a review. Redirecting to login page.");
@@ -41,7 +41,7 @@ export default function WriteReview() {
         }
     }, [isLoggedIn, user_id, router]);
 
-    // Handle changes to form inputs
+    
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = e.target;
         setFormData((prevData) => ({
@@ -56,7 +56,7 @@ export default function WriteReview() {
         }
     };
 
-    // Fetch book suggestions from Open Library API based on the title
+   
     const fetchBookSuggestions = async (searchTerm: string) => {
         try {
             const response = await fetch(
@@ -69,7 +69,7 @@ export default function WriteReview() {
         }
     };
 
-    // Fetch book description from Open Library API using the work key
+    
     const fetchBookDescription = async (workKey: string | undefined) => {
         if (!workKey) return "No description available.";
 
@@ -83,7 +83,7 @@ export default function WriteReview() {
         }
     };
 
-    // Handle book suggestion click
+    
     const handleSuggestionClick = async (book: BookSuggestion) => {
         const description = await fetchBookDescription(book.key);
 
@@ -99,14 +99,14 @@ export default function WriteReview() {
         setSuggestions([]);
     };
 
-    // Prevent form submission on "Enter" key
+    
     const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
         if (e.key === "Enter") {
             e.preventDefault();
         }
     };
 
-    // Handle form submission
+    
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("Form Data Submitted:", formData);
@@ -115,11 +115,11 @@ export default function WriteReview() {
             title: formData.reviewTitle,
             rating: parseInt(formData.stars, 10),
             desc: formData.review,
-            user_id, // Add user_id here
+            user_id, 
             book: {
                 title: formData.title,
                 author: formData.author,
-                genre: ["Example Genre"], // You can replace this with actual genre
+                genre: ["Example Genre"],
                 desc: formData.description,
                 img_url: formData.imageUrl,
             },
@@ -166,7 +166,7 @@ export default function WriteReview() {
     return (
         <div className="book-background">
             <form
-                className={`page-container ${fontClass}`} // Apply fontClass to form container
+                className={`page-container ${fontClass}`} 
                 onSubmit={handleSubmit}
                 onKeyDown={handleKeyDown}
             >
@@ -177,7 +177,7 @@ export default function WriteReview() {
                     <input
                         type="text"
                         id="title"
-                        className={`textboxReview ${fontClass}`} // Apply fontClass to input fields
+                        className={`textboxReview ${fontClass}`} 
                         placeholder="Enter Book Title"
                         value={formData.title}
                         onChange={handleChange}
@@ -189,7 +189,7 @@ export default function WriteReview() {
                                 <li
                                     key={index}
                                     onClick={() => handleSuggestionClick(book)}
-                                    className='suggestion-item' // Apply fontClass to suggestion items
+                                    className='suggestion-item' 
                                 >
                                     {book.title} -{" "}
                                     {book.author_name ? book.author_name.join(", ") : "Unknown"}
@@ -214,7 +214,7 @@ export default function WriteReview() {
                     <input
                         type="text"
                         id="author"
-                        className={`textboxReview ${fontClass}`} // Apply fontClass to input fields
+                        className={`textboxReview ${fontClass}`} 
                         placeholder="Author will appear here..."
                         value={formData.author}
                         onChange={handleChange}
@@ -225,7 +225,7 @@ export default function WriteReview() {
                     </label>
                     <textarea
                         id="description"
-                        className={`textboxReview review-box ${fontClass}`} // Apply fontClass to textarea
+                        className={`textboxReview review-box ${fontClass}`} 
                         placeholder="Book description will appear here..."
                         value={formData.description}
                         readOnly

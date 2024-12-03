@@ -102,3 +102,8 @@ header {
 .user-dropdown-menu .dropdown-item:hover {
   background-color: #444;
 }
+
+.title:hover {
+  color: rgb(238, 110, 193); 
+  cursor: pointer;
+}

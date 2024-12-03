@@ -33,14 +33,14 @@ const authOptions = {
             throw new Error("Invalid username or password.");
           }
 
-            //if success, return user data
+            
             return {
             id: user._id.toString(),
             username: user.username,
           };
         } catch (error) {
           console.error("Authorize error:", error);
-          return null; //if fail, return null
+          return null; 
         }
       },
     }),

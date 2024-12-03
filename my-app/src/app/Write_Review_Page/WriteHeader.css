@@ -22,7 +22,7 @@
     border-color: #888;
 }
 
-/* Basic styling for header */
+
 .w-header {
     margin-top: 20px;
     padding: 20px;
@@ -31,7 +31,7 @@
     align-items: center;
 }
 
-/* Title container is now inside the flex layout */
+
 .w-title-container {
     display: flex;
     justify-content: space-between;
@@ -45,7 +45,7 @@
     gap: 15px; 
 }
 
-/* Title styling */
+
 .w-title {
     margin: 0;
     font-size: 4rem;

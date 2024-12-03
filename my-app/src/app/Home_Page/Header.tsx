@@ -16,12 +16,11 @@ const titleFont = IM_Fell_English_SC({
 });
 
 export default function Header() {
-  const { isLoggedIn, logout, username, user_id } = useAuth(); // Get auth state and logout function
-  const [isDropdownOpen, setDropdownOpen] = useState(false); // State for genre dropdown menu
-  const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); // State for username dropdown menu
-  const userDropdownRef = useRef<HTMLDivElement | null>(null); // Ref for the username dropdown
+  const { isLoggedIn, logout, username, user_id } = useAuth(); 
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); 
+  const userDropdownRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
-
 
   const genres = [
     "Fantasy",
@@ -38,13 +37,13 @@ export default function Header() {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  
   useEffect(() => {
     console.log("Home Page Loaded!");
     console.log("isLoggedIn:", isLoggedIn);
     console.log("Username:", username);
     console.log("User ID:", user_id);
   }, [isLoggedIn, username, user_id]); 
+
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!isUserDropdownOpen);
   };
@@ -77,17 +76,19 @@ export default function Header() {
         <div onClick={toggleDropdown}>
           <GenreButton />
         </div>
-        <h1 className={`${titleFont.className} title`}>Prose</h1>
+        <Link href="/" className={`${titleFont.className} title`}>
+          Prose
+        </Link>
       </div>
       {isDropdownOpen && (
-      <div className="dropdown-menu">
-        {genres.map((genre, index) => (
-          <Link href={`/genre/${genre.toLowerCase()}`} key={index}>
-            <div className="dropdown-item">{genre}</div>
-          </Link>
-        ))}
-      </div>
-       )}
+        <div className="dropdown-menu">
+          {genres.map((genre, index) => (
+            <Link href={`/genre/${genre.toLowerCase()}`} key={index}>
+              <div className="dropdown-item">{genre}</div>
+            </Link>
+          ))}
+        </div>
+      )}
       <div className="user-section" ref={userDropdownRef}>
         {isLoggedIn ? (
           <>

@@ -1,10 +1,11 @@
+
 "use client";
 import React, { useState } from "react";
 import "./ViewReview.css";
 import book from "../images/OpenBook2.png";
 import { FaArrowUp } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
-
+import { useAuth } from "../AuthContext";
 interface ViewReviewProps {
     stars: string;
     reviewTitle: string;
@@ -30,10 +31,16 @@ export default function ViewReview({
     downvotes,
     reviewId,
 }: ViewReviewProps) {
+    const { isLoggedIn } = useAuth(); // Access auth state
     const [currentUpvotes, setCurrentUpvotes] = useState(upvotes);
     const [currentDownvotes, setCurrentDownvotes] = useState(downvotes);
 
     const handleVote = async (type: "upvote" | "downvote") => {
+        if (!isLoggedIn) {
+            alert("You need to be logged in to vote.");
+            return;
+        }
+
         const newValue =
             type === "upvote" ? currentUpvotes + 1 : currentDownvotes + 1;
 
@@ -62,6 +69,7 @@ export default function ViewReview({
                 <button
                     className="view-upvote-button"
                     onClick={() => handleVote("upvote")}
+                    disabled={!isLoggedIn}
                 >
                     <FaArrowUp className="upvote" />
                     {currentUpvotes}
@@ -70,6 +78,7 @@ export default function ViewReview({
                 <button
                     className="view-downvote-button"
                     onClick={() => handleVote("downvote")}
+                    disabled={!isLoggedIn}
                 >
                     <FaArrowDown className="downvote" />
                     {currentDownvotes}
