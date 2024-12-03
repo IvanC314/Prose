@@ -16,7 +16,7 @@ const titleFont = IM_Fell_English_SC({
 
 export default function Login() {
     const router = useRouter();
-    const { isLoggedIn, user_id, login } = useAuth();  // Destructure isLoggedIn and user_id from context
+    const { isLoggedIn, user_id, login } = useAuth();  
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

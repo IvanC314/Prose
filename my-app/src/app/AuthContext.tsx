@@ -17,22 +17,22 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const { data: session, status } = useSession();  // session hook from next-auth
+  const { data: session, status } = useSession();  
   const [exquisiteToggle, setExquisiteToggle] = useState<boolean>(false);
 
   useEffect(() => {
-    // Sync session state with sessionStorage if it's present
+   
     if (session?.user) {
       sessionStorage.setItem("isLoggedIn", "true");
       sessionStorage.setItem("username", session.user.username || "");
       sessionStorage.setItem("user_id", session.user.id || "");
     } else {
-      // Clear sessionStorage if no user is logged in
+      
       sessionStorage.setItem("isLoggedIn", "false");
       sessionStorage.setItem("username", "");
       sessionStorage.setItem("user_id", "");
     }
-  }, [session]); // This effect runs when session data changes
+  }, [session]); 
 
   const login = (username: string, user_id: string) => {
     sessionStorage.setItem("isLoggedIn", "true");
@@ -41,9 +41,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
-    signOut({ redirect: false }); // Prevent auto redirect by next-auth
+    signOut({ redirect: false }); 
     
-    // Clear sessionStorage
+    
     sessionStorage.removeItem("exquisiteToggle");
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("username");
@@ -58,7 +58,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn: session?.user !== undefined,  // Check if session has user
+        isLoggedIn: session?.user !== undefined,  
         username: session?.user?.username || null,
         user_id: session?.user?.id || null,
         exquisiteToggle,
