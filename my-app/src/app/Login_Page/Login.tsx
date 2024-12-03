@@ -100,7 +100,8 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <p className="text">Forgot your password?</p>
+                <button className="forgot-button">Forgot your password?</button>
+                <div></div>
                 <Button text="Sign In" />
             </form>
 

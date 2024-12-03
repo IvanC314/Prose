@@ -71,3 +71,11 @@ form{
     width: 100%;
     text-align: center;
 }
+
+.forgot-button {
+    color:rgb(255, 93, 93)
+}
+
+.forgot-button:hover {
+    cursor: pointer;
+}
