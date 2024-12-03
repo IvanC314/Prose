@@ -34,7 +34,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 
                 const reviewData = {
                     id:data.item._id,
-                    title: data.item.title,
+                    title: data.book.title,
                     imageUrl: data.book.img_url || '',
                     author: data.book.author || 'Unknown Author',
                     description: data.book.desc || 'No description available.',
