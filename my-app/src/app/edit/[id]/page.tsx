@@ -31,7 +31,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
                 const data = await res.json();
 
-                // Assuming the structure of the response data
+                
                 const reviewData = {
                     id:data.item._id,
                     title: data.item.title,
@@ -52,7 +52,7 @@ export default function Page({ params }: { params: { id: string } }) {
         };
 
         fetchReviewData();
-    }, [params.id]); // Fetch when `id` changes
+    }, [params.id]); 
 
     if (!formData) {
         return <div>Loading...</div>;

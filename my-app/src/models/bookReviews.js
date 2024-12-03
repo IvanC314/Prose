@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookReviewSchema = new Schema({
-  book_id: { type: mongoose.Schema.Types.ObjectId, ref: 'books', required: true },  // Corrected reference to books
-  review_id: { type: mongoose.Schema.Types.ObjectId, ref: 'reviews', required: true }  // Corrected reference to reviews
+  book_id: { type: mongoose.Schema.Types.ObjectId, ref: 'books', required: true },  
+  review_id: { type: mongoose.Schema.Types.ObjectId, ref: 'reviews', required: true }  
 }, {
-  collection: 'bookReviews'  // Corrected collection name
+  collection: 'bookReviews'  
 });
 
 module.exports = mongoose.models.bookReviews || mongoose.model("bookReviews", bookReviewSchema);

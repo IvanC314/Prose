@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const User = require('../users');
 
-const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
+const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; 
 
 const users = [
   { email: 'alice@example.com', f_name: 'Alice', l_name: 'Smith', password: 'password123', username: 'smolBeanAlice' },
@@ -17,7 +17,6 @@ async function insertUsers() {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Insert new users only if their username does not already exist in the database
     for (const user of users) {
       const existingUser = await User.findOne({ username: user.username });
       

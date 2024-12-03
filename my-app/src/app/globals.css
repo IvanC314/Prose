@@ -24,7 +24,6 @@ body {
     background: var(--background);
     font-family: Arial, Helvetica, sans-serif;
 
-    /* Dark wood background */
     background-image: url('./images/DarkWood.jpg');
     background-size: 100% auto;
     background-repeat: repeat-y;

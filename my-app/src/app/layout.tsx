@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // import type { Metadata } from "next";
 // import "./globals.css";
 // import { AuthProvider } from "./AuthContext";
@@ -25,6 +26,12 @@
 import Providers from "./Providers";
 import type { Metadata } from "next";
 import "./globals.css";
+=======
+import type { Metadata } from "next";
+import "./globals.css";
+import { AuthProvider } from "./AuthContext";
+import { monsieurClass } from "./styles/fontSwitcher"; 
+>>>>>>> Stashed changes
 
 export const metadata = {
   title: "Prose",
@@ -37,7 +44,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+<<<<<<< Updated upstream
     <html lang="en">
+=======
+    <html lang="en" className={monsieurClass}> 
+>>>>>>> Stashed changes
       <body>
         <Providers>{children}</Providers>
       </body>

@@ -8,7 +8,7 @@
     font-weight: bold;
     color: black;
     background-color: white;
-    border: 2px solid black; /* Adds a border to make it more distinct */
+    border: 2px solid black; 
     border-radius: 15px;
     text-align: center;
     text-decoration: none;
@@ -18,47 +18,56 @@
 }
 
 .white-button:hover {
-    background-color: #f0f0f0; /* Slightly darker white background on hover */
-    border-color: #888; /* Darken the border on hover */
+    background-color: #f0f0f0; 
+    border-color: #888;
 }
 
+<<<<<<< Updated upstream
 /* Basic styling for header */
 .w-header {
+=======
+header {
+>>>>>>> Stashed changes
     margin-top: 20px;
     padding: 20px;
     display: flex;
-    justify-content: space-between; /* Space between left and right sections */
+    justify-content: space-between; 
     align-items: center;
 }
 
+<<<<<<< Updated upstream
 /* Title container is now inside the flex layout */
 .w-title-container {
+=======
+.title-container {
+>>>>>>> Stashed changes
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
 }
 
-/* Left section for HomeButton and title */
 .left-section {
     display: flex;
     align-items: center;
-    gap: 15px; /* Add space between HomeButton and title */
+    gap: 15px; 
 }
 
+<<<<<<< Updated upstream
 /* Title styling */
 .w-title {
+=======
+.title {
+>>>>>>> Stashed changes
     margin: 0;
     font-size: 4rem;
 }
 
-/* Button container for buttons aligned to the right */
 .button-container {
     display: flex;
     gap: 10px;
 }
 
-/* Styling for the buttons */
 .white-button, .button {
     padding: 10px 20px;
     background-color: #c4c4c4;
@@ -73,25 +82,24 @@
     background-color: #9f9f9f;
 }
 
-/* Ensure the background GIF stays behind content */
 .exquisite-gif {
     position: absolute;
     top: 0px;
     left: 300px;
-    width: 30%; /* You can adjust the size or use specific dimensions */
-    z-index: -1; /* This places the GIF behind the content */
-    pointer-events: none; /* Prevents the GIF from interacting with mouse events */
-    object-fit: cover; /* Ensures the GIF covers the container without stretching */
+    width: 30%; 
+    z-index: -1; 
+    pointer-events: none; 
+    object-fit: cover; 
     opacity: .8;
 }
 
-/* Additional styles for other components */
+
 .title-container {
     position: relative;
-    z-index: 10; /* Ensure the content is above the GIF */
+    z-index: 10; 
 }
 
 .left-section, .button-container {
     position: relative;
-    z-index: 10; /* Ensure buttons and text stay above the GIF */
+    z-index: 10; 
 }

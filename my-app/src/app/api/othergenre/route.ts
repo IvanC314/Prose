@@ -10,7 +10,7 @@ import { NextRequest } from "next/server";
 export async function GET(request: NextRequest) {
   const excludedGenres = [
     "Fantasy", "Sci-Fi", "Mystery", "Non-Fiction", "Romance", "Young Adult", "Education"
-  ]; // genres to exclude
+  ]; 
 
   try {
     await connectMongoDB();
@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
       { $unwind: { path: "$book" } },
       {
         $match: {
-          "book.genre": { $nin: excludedGenres },  // Exclude specified genres
+          "book.genre": { $nin: excludedGenres },  
         },
       },
       {

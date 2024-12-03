@@ -43,6 +43,7 @@ export default function Login() {
 
         const data = await response.json();
 
+<<<<<<< Updated upstream
         if (!response.ok) {
             setError(data.error || "Invalid login credentials.");
             return;
@@ -61,6 +62,18 @@ export default function Login() {
             setError("Login failed. Please try again.");
             return;
         }
+=======
+    const { username: returnedUsername, user_id } = data;
+
+    login(returnedUsername, user_id); 
+
+    console.log("Login successful!");
+    console.log("Username:", returnedUsername);
+    console.log("User ID:", user_id);
+
+    router.push("/Home_Page"); 
+  };
+>>>>>>> Stashed changes
 
         // On successful login, update the AuthContext and redirect
         login(returnedUsername, user_id);

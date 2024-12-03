@@ -1,18 +1,15 @@
-/* GenrePage.module.css */
-
-/* Add the same font and size as Featured Reviews heading */
 .genrePageContainer {
   padding: 20px;
 }
 
 .genreTitle {
-  font-family: "Georgia", serif; /* Same as Featured Reviews */
-  font-size: 3rem; /* Match the font size of Featured Reviews */
+  font-family: "Georgia", serif; 
+  font-size: 3rem; 
   font-weight: bold;
-  color: whitesmoke; /* Same color as Featured Reviews */
-  margin-top: -45px; /* Adjust margin to match Featured Reviews */
+  color: whitesmoke; 
+  margin-top: -45px; 
   margin-bottom: 10px;
-  text-align: center; /* Center-align the text */
+  text-align: center; 
 }
 
 .genreDescription {

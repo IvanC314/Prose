@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Book = require('../books');
 
-const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
+const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; 
 
 const books = [
   { 
@@ -47,11 +47,9 @@ async function insertBooks() {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the books collection
     await Book.deleteMany({});
     console.log('Cleared books collection');
 
-    // Insert new books
     const result = await Book.insertMany(books);
     console.log('Books inserted:', result);
   } catch (err) {

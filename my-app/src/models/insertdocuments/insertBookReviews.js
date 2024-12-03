@@ -4,22 +4,22 @@ const Book = require('../books');
 const Review = require('../reviews');
 const BookReview = require('../bookReviews');
 
-const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
+const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; 
 
 async function insertBookReviews() {
   try {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the bookReviews collection
+    
     await BookReview.deleteMany({});
     console.log('Cleared bookReviews collection');
 
-    // Fetch all books and reviews
+    
     const books = await Book.find();
     const reviews = await Review.find();
 
-    // Log the fetched data for debugging
+   
     console.log("Books:", books);
     console.log("Reviews:", reviews);
 
@@ -27,23 +27,21 @@ async function insertBookReviews() {
       throw new Error('Not enough books or reviews found. Ensure you have run insertBooks.js and insertReviews.js.');
     }
 
-    // Create associations
+    
     const bookReviews = books.map((book, index) => {
       const review = reviews[index];
       if (!review) {
         console.error(`Review not found for book ${book._id}`);
-        return null; // Skip if no review is available for this book
+        return null; 
       }
       return {
         book_id: book._id,
         review_id: review._id,
       };
-    }).filter((bookReview) => bookReview !== null); // Filter out any null values
+    }).filter((bookReview) => bookReview !== null);
 
-    // Log the associations to be inserted for debugging
     console.log("Book Reviews to be inserted:", bookReviews);
 
-    // Insert valid bookReviews
     if (bookReviews.length > 0) {
       const result = await BookReview.insertMany(bookReviews);
       console.log('BookReviews inserted:', result);

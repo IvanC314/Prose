@@ -1,77 +1,3 @@
-/* .register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    background-color: rgba(34, 34, 34, 0.849);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-
-    width: 35%; 
-    height: auto; 
-    margin: 0 auto; 
-    position: relative;
-    padding: 20px; 
-
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-}
-
-.title-register{
-    font-size:7rem;
-    line-height: .8;
-}
-
-.text-register{
-    font-size:2rem;
-    color: rgb(167, 0, 167);
-}
-
-.textboxLabel {
-    font-size: 1.6rem;
-    color: #ffffff; 
-}
-
-.name-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;  
-    place-items: center;
-
-}
-
-.textboxLabel-name {
-    font-size: 1.6rem;
-    color: #ffffff; 
-}
-
-.textbox {
-    width: 80%; 
-    height: 5%;
-    padding: 10px; 
-    font-size: 1rem;
-    border: 3px solid #ffffff; 
-    border-radius: 5px; 
-    box-sizing: border-box; 
-    outline: none; 
-    transition: border-color 0.3s, box-shadow 0.3s; 
-    color: black;
-}
-
-.textbox:focus {
-    border-color: rgb(211, 44, 152); 
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
-    color: black;
-}
-
-.textbox:placeholder {
-    color: #000000;
-} */
-
 .register-container {
     display: flex;
     flex-direction: column;
@@ -81,7 +7,7 @@
     background-color: rgba(34, 34, 34, 0.85);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 40%; /* Slightly increased for a balanced layout */
+    width: 40%; 
     margin: 0 auto;
     position: absolute;
     top: 50%;
@@ -106,11 +32,11 @@
     font-size: 1.2rem;
     color: #ffffff;
     margin-bottom: 5px;
-    display: block; /* Ensure labels are above their inputs */
+    display: block; 
 }
 
 .textbox {
-    width: 90%; /* Ensure consistent width */
+    width: 90%; 
     padding: 10px;
     font-size: 1rem;
     border: 2px solid #ffffff;
@@ -118,7 +44,7 @@
     box-sizing: border-box;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
-    margin-bottom: 15px; /* Add spacing between inputs */
+    margin-bottom: 15px; 
     color: black;
 }
 
@@ -134,13 +60,13 @@
 .name-container {
     display: flex;
     justify-content: space-between;
-    gap: 20px; /* Add spacing between first and last name fields */
+    gap: 20px; 
     width: 100%;
     margin-bottom: 20px;
 }
 
 .name-container .textbox {
-    width: 100%; /* Inputs span their container properly */
+    width: 100%; 
 }
 
 form {
@@ -156,7 +82,7 @@ form {
     margin-bottom: 15px;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
     .register-container {
         width: 90%;

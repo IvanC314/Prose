@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import connectMongoDB from "@/libs/mongodb";
-import Item from "@/models/reviews";  // Review model
+import Item from "@/models/reviews";  
 import UserReview from "@/models/userReviews";
 import BookReview from "@/models/bookReviews"; 
-import Book from "@/models/books";  // Book model
+import Book from "@/models/books";  
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
@@ -11,7 +11,7 @@ interface RouteParams {
     params: { id: string };
 }
 
-// RETURNS BOOK AND REVIEW DATA
+
 export async function GET(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
     
@@ -28,28 +28,6 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     return NextResponse.json({ item: review, book }, { status: 200 });
 }
 
-// export async function PUT(request: NextRequest, { params }: RouteParams) {
-//     const { id } = params;
-//     const { upvotes, downvotes } = await request.json();
-
-//     await connectMongoDB();
-
-//     const updateFields: any = {};
-//     if (typeof upvotes === "number") updateFields.upvotes = upvotes;
-//     if (typeof downvotes === "number") updateFields.downvotes = downvotes;
-
-//     const updatedItem = await Item.findByIdAndUpdate(
-//         id,
-//         { $set: updateFields },
-//         { new: true }
-//     );
-
-//     if (!updatedItem) {
-//         return NextResponse.json({ message: "Item not found" }, { status: 404 });
-//     }
-
-//     return NextResponse.json({ message: "Item updated", updatedItem }, { status: 200 });
-// }
 
 export async function PUT(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
@@ -59,16 +37,16 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
     const updateFields: any = {};
 
-    // Update review details
+    
     if (reviewTitle) updateFields.title = reviewTitle;
     if (typeof stars === "number") updateFields.rating = stars;
     if (review) updateFields.desc = review;
 
-    // Keep the upvotes and downvotes intact if provided
+    
     if (typeof upvotes === "number") updateFields.upvotes = upvotes;
     if (typeof downvotes === "number") updateFields.downvotes = downvotes;
 
-    // Perform the update
+    
     const updatedItem = await Item.findByIdAndUpdate(
         id,
         { $set: updateFields },
@@ -85,7 +63,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
 
-    // Validate ID format
+    
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return NextResponse.json({ message: "Invalid ID format" }, { status: 400 });
     }
@@ -93,19 +71,19 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     await connectMongoDB();
 
     try {
-        // Delete the review
+        
         const deletedItem = await Item.findByIdAndDelete(id);
         if (!deletedItem) {
             return NextResponse.json({ message: "Review not found" }, { status: 404 });
         }
 
-        // Delete any references in userReviews
+        
         const deletedUserReviews = await UserReview.deleteMany({ review_id: id });
 
-        // Delete any references in bookReviews
+        
         const deletedBookReviews = await BookReview.deleteMany({ review_id: id });
 
-        // Return a success response
+        
         return NextResponse.json(
             {
                 message: "Review and associated references deleted",

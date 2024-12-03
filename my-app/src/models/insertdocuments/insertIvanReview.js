@@ -6,21 +6,19 @@ const Review = require('../reviews');
 const UserReview = require('../userReviews');
 const BookReview = require('../bookReviews');
 
-const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
+const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose';
 
 async function insertReviewIvan() {
   try {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Find the user with the username 'icao'
     const user = await User.findOne({ username: 'icao' });
     if (!user) {
       throw new Error('User with username "icao" not found');
     }
     console.log('User found:', user);
 
-    // Create the book "The Art of War"
     const book = new Book({
       title: 'The Art of War',
       author: 'Sun Tzu',
@@ -31,7 +29,6 @@ async function insertReviewIvan() {
     await book.save();
     console.log('Book inserted:', book);
 
-    // Create a review for the book
     const review = new Review({
       title: 'Strategic Masterpiece',
       rating: 5,
@@ -42,7 +39,6 @@ async function insertReviewIvan() {
     await review.save();
     console.log('Review inserted:', review);
 
-    // Create an association between the user and the review
     const userReview = new UserReview({
       user_id: user._id,
       review_id: review._id,
@@ -50,7 +46,6 @@ async function insertReviewIvan() {
     await userReview.save();
     console.log('UserReview inserted:', userReview);
 
-    // Create an association between the book and the review
     const bookReview = new BookReview({
       book_id: book._id,
       review_id: review._id,

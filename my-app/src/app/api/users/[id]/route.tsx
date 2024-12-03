@@ -15,26 +15,26 @@ interface RouteParams {
     params: { id: string };
 }
 
-// RETURNS BOOK AND REVIEW DATA
+
 export async function GET(request: NextRequest, { params }: RouteParams) {
     const { id } = params;
     const userId = id;
     try {
         await connectMongoDB();
 
-        // Validate the userId
+        
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             return NextResponse.json({ error: "Invalid User ID format" }, { status: 400 });
         }
 
-        // Fetch the user details
+        
         const user = await User.findById(userId);
 
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
-        // Fetch all userReviews that match the userId
+        
         const userReviews = await UserReview.find({ user_id: userId }).select("review_id");
 
         if (!userReviews.length) {
@@ -50,30 +50,27 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
             }, { status: 200 });
         }
 
-        // Extract review IDs from userReviews
+        
         const reviewIds = userReviews.map((ur) => ur.review_id);
 
-        // Fetch bookReview documents to get book IDs for the review IDs
+        
         const bookReviews = await BookReview.find({ review_id: { $in: reviewIds } }).select("book_id review_id");
 
-        const bookIdMap = new Map(); // Map to associate review_id -> book_id
+        const bookIdMap = new Map(); 
         bookReviews.forEach((br) => {
             bookIdMap.set(br.review_id.toString(), br.book_id);
         });
 
-        // Fetch reviews for the extracted IDs
         const reviews = await Review.find({ _id: { $in: reviewIds } }).exec();
 
-        // Fetch books for the extracted book IDs
         const bookIds = Array.from(bookIdMap.values());
         const books = await Book.find({ _id: { $in: bookIds } }).select("title author genre img_url").exec();
 
-        const bookDataMap = new Map(); // Map to associate book_id -> book data
+        const bookDataMap = new Map(); 
         books.forEach((book) => {
             bookDataMap.set(book._id.toString(), book);
         });
 
-        // Construct the response object
         const userReviewData = {
             user: {
                 _id: user._id,

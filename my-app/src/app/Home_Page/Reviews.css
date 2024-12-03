@@ -32,18 +32,3 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-
-/*OLD
-.reviews-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 30px 100px; 
-    padding: 50px 100px; 
-}
-
-.review-center {
-    display: flex;
-    justify-content: center; 
-}
-    */

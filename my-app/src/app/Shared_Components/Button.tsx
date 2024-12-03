@@ -4,8 +4,8 @@ import './Button.css';
 
 interface ButtonProps {
     text: string;
-    targetPage?: string;  // Optional targetPage since it's not always used
-    onClick?: () => void;  // Add onClick prop to handle the click behavior
+    targetPage?: string; 
+    onClick?: () => void; 
 }
 
 export default function Button({ text, targetPage, onClick }: ButtonProps) {
@@ -18,11 +18,11 @@ export default function Button({ text, targetPage, onClick }: ButtonProps) {
             onClick();
         }
 
-        // Only navigate if a targetPage is specified
+       
         if (targetPage) {
             console.log("Navigating to:", targetPage);
-            event.preventDefault(); // Prevent default behavior if we are not navigating
-            router.push(targetPage);  // If targetPage is passed, navigate to it
+            event.preventDefault(); 
+            router.push(targetPage);  
         }
     };
 

@@ -5,7 +5,7 @@ import Account from "./Account";
 import { useAuth } from "@/app/AuthContext";
 
 export default function AccountPage() {
-    const { user_id, isLoggedIn } = useAuth();  // Destructure user_id and isLoggedIn
+    const { user_id, isLoggedIn } = useAuth(); 
     const [user, setUser] = useState({
         profileImage: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg",
         firstName: "",
@@ -14,7 +14,6 @@ export default function AccountPage() {
         username: "",
     });
 
-    // Declare the fetchUser function outside of the useEffect block
     async function fetchUser(user_id: string) {
         try {
             const response = await fetch(`http://localhost:3000/api/users/${user_id}`);
@@ -36,12 +35,11 @@ export default function AccountPage() {
         }
     }
 
-    // Fetch user data when user_id is available and user is logged in
     useEffect(() => {
         if (isLoggedIn && user_id) {
-            fetchUser(user_id); // Call the fetchUser function with user_id
+            fetchUser(user_id); 
         }
-    }, [isLoggedIn, user_id]);  // Effect depends on isLoggedIn and user_id
+    }, [isLoggedIn, user_id]);  
 
     return (
         <div>

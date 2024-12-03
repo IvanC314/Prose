@@ -15,7 +15,7 @@ interface ReviewCardProps {
     bookAuthor: string;
     upvotes: number;
     downvotes: number;
-    handleDelete: (id: string) => void; // New prop to handle deletion
+    handleDelete: (id: string) => void; 
 }
 
 export default function ReviewCard({ 
@@ -42,7 +42,7 @@ export default function ReviewCard({
 
             if (response.ok) {
                 alert("Review deleted successfully!");
-                handleDelete(id); // Call the handleDelete function passed from Reviews
+                handleDelete(id); 
             } else {
                 const errorData = await response.json();
                 alert("Failed to delete the review. Please try again.");

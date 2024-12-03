@@ -16,12 +16,19 @@ const titleFont = IM_Fell_English_SC({
 });
 
 export default function Header() {
+<<<<<<< Updated upstream
   const { isLoggedIn, logout, username, user_id } = useAuth(); // Get auth state and logout function
   const [isDropdownOpen, setDropdownOpen] = useState(false); // State for genre dropdown menu
   const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); // State for username dropdown menu
   const userDropdownRef = useRef<HTMLDivElement | null>(null); // Ref for the username dropdown
   const router = useRouter();
 
+=======
+  const { isLoggedIn, logout, username, user_id } = useAuth(); 
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isUserDropdownOpen, setUserDropdownOpen] = useState(false);
+  const userDropdownRef = useRef<HTMLDivElement | null>(null); 
+>>>>>>> Stashed changes
 
   const genres = [
     "Fantasy",
@@ -38,13 +45,13 @@ export default function Header() {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  // Log auth status when the component mounts
+  
   useEffect(() => {
     console.log("Home Page Loaded!");
     console.log("isLoggedIn:", isLoggedIn);
     console.log("Username:", username);
     console.log("User ID:", user_id);
-  }, [isLoggedIn, username, user_id]); // Re-run log if any of these values change
+  }, [isLoggedIn, username, user_id]); 
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!isUserDropdownOpen);
   };
@@ -52,11 +59,15 @@ export default function Header() {
   const handleLogout = () => {
     console.log("Logged out!");
     logout();
+<<<<<<< Updated upstream
     // Simulate logging out
     router.push("/"); // Safely use the router here
+=======
+    
+    window.location.href = "/"; 
+>>>>>>> Stashed changes
   };
 
-  // Close the user dropdown when clicking outside of it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -76,13 +87,11 @@ export default function Header() {
   return (
     <header>
       <div className="title-container">
-        {/* Use existing burger icon for the dropdown */}
         <div onClick={toggleDropdown}>
           <GenreButton />
         </div>
         <h1 className={`${titleFont.className} title`}>Prose</h1>
       </div>
-      {/* Dropdown Menu */}
       {isDropdownOpen && (
       <div className="dropdown-menu">
         {genres.map((genre, index) => (

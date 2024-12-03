@@ -11,7 +11,7 @@ import "../../Home_Page/Header.css";
 export default function GenrePage({ params }: { params: Promise<{ genre: string }> }) {
   const [genre, setGenre] = useState<string>('');
   const [reviews, setReviews] = useState<any[]>([]);
-  const placeholderImage = "https://m.media-amazon.com/images/I/418BtHPOsNL._SY445_SX342_.jpg"; // Placeholder image
+  const placeholderImage = "https://m.media-amazon.com/images/I/418BtHPOsNL._SY445_SX342_.jpg"; 
 
   const formatGenre = (genre: string) => {
     const exceptions = {
@@ -76,16 +76,16 @@ export default function GenrePage({ params }: { params: Promise<{ genre: string 
       <div className="reviews-container">
         {reviews.map((review) => (
           <ReviewCard
-            key={review._id} // Pass unique key
-            id={review._id} // Review ID for navigation
-            stars={"⭐".repeat(review.rating)} // Convert rating to stars
-            reviewTitle={review.title} // Title of the review
-            reviewAuthor={review.reviewAuthor} // Author of the review
-            bookImage={review.bookImage || placeholderImage} // Ensure a valid image
-            bookTitle={review.bookTitle} // Book title
-            bookAuthor={review.bookAuthor} // Book author
-            upvotes={review.upvotes} // Upvotes
-            downvotes={review.downvotes} // Downvotes
+            key={review._id} 
+            id={review._id} 
+            stars={"⭐".repeat(review.rating)} 
+            reviewTitle={review.title} 
+            reviewAuthor={review.reviewAuthor} 
+            bookImage={review.bookImage || placeholderImage} 
+            bookTitle={review.bookTitle} 
+            bookAuthor={review.bookAuthor} 
+            upvotes={review.upvotes} 
+            downvotes={review.downvotes} 
           />
         ))}
       </div>

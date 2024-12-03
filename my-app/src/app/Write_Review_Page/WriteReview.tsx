@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 // "use client";
 // import React, { useState } from "react";
 // import "./WriteReview.css";
@@ -268,13 +269,19 @@
 // }
 
 
+=======
+>>>>>>> Stashed changes
 "use client";
 import React, { useState, useEffect } from "react";
 import "./WriteReview.css";
 import Button from "../Shared_Components/Button";
 import { useAuth } from "@/app/AuthContext";
+<<<<<<< Updated upstream
 import { useRouter } from "next/navigation"; // Import useRouter for redirection
 import { monsieurClass } from "../styles/fontSwitcher"; // Import monsieur class
+=======
+import { monsieurClass } from "../styles/fontSwitcher"; 
+>>>>>>> Stashed changes
 
 interface BookSuggestion {
     title: string;
@@ -284,8 +291,12 @@ interface BookSuggestion {
 }
 
 export default function WriteReview() {
+<<<<<<< Updated upstream
     const { user_id, isLoggedIn } = useAuth();  // Destructure user_id and isLoggedIn
     const router = useRouter(); // Initialize router for redirection
+=======
+  const { user_id, isLoggedIn } = useAuth();  
+>>>>>>> Stashed changes
 
     const [formData, setFormData] = useState({
         title: "",
@@ -297,6 +308,7 @@ export default function WriteReview() {
         review: "",
     });
 
+<<<<<<< Updated upstream
     const [suggestions, setSuggestions] = useState<BookSuggestion[]>([]);
     const { exquisiteToggle, toggleExquisiteMode } = useAuth(); // Access AuthContext
 
@@ -310,6 +322,19 @@ export default function WriteReview() {
             router.push("/Login_Page");
         }
     }, [isLoggedIn, user_id, router]);
+=======
+  const [suggestions, setSuggestions] = useState<BookSuggestion[]>([]);
+  const { exquisiteToggle, toggleExquisiteMode } = useAuth(); 
+
+  const fontClass = exquisiteToggle ? monsieurClass : '';
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+>>>>>>> Stashed changes
 
     // Handle changes to form inputs
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -319,11 +344,76 @@ export default function WriteReview() {
             [id]: value,
         }));
 
+<<<<<<< Updated upstream
         if (id === "title" && value.length > 2) {
             fetchBookSuggestions(value);
         } else if (id === "title" && value.length <= 2) {
             setSuggestions([]);
         }
+=======
+  const fetchBookSuggestions = async (searchTerm: string) => {
+    try {
+      const response = await fetch(
+        `https://openlibrary.org/search.json?title=${searchTerm}`
+      );
+      const data = await response.json();
+      setSuggestions(data.docs.slice(0, 5));
+    } catch (error) {
+      console.error("Error fetching book suggestions:", error);
+    }
+  };
+
+  const fetchBookDescription = async (workKey: string | undefined) => {
+    if (!workKey) return "No description available.";
+
+    try {
+      const response = await fetch(`https://openlibrary.org${workKey}.json`);
+      const data = await response.json();
+      return data.description?.value || "No description available.";
+    } catch (error) {
+      console.error("Error fetching book description:", error);
+      return "Error fetching description.";
+    }
+  };
+
+  const handleSuggestionClick = async (book: BookSuggestion) => {
+    const description = await fetchBookDescription(book.key);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      title: book.title,
+      author: book.author_name ? book.author_name.join(", ") : "Unknown",
+      imageUrl: book.isbn
+        ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-L.jpg`
+        : "",
+      description,
+    }));
+    setSuggestions([]);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form Data Submitted:", formData);
+
+    const reviewData = {
+      title: formData.reviewTitle,
+      rating: parseInt(formData.stars, 10),
+      desc: formData.review,
+      user_id, 
+      book: {
+        title: formData.title,
+        author: formData.author,
+        genre: ["Example Genre"], 
+        desc: formData.description,
+        img_url: formData.imageUrl,
+      },
+>>>>>>> Stashed changes
     };
 
     // Fetch book suggestions from Open Library API based on the title
@@ -357,6 +447,7 @@ export default function WriteReview() {
     const handleSuggestionClick = async (book: BookSuggestion) => {
         const description = await fetchBookDescription(book.key);
 
+<<<<<<< Updated upstream
         setFormData((prevData) => ({
             ...prevData,
             title: book.title,
@@ -375,12 +466,49 @@ export default function WriteReview() {
             e.preventDefault();
         }
     };
+=======
+  return (
+    <div className="book-background">
+      <form
+        className={`page-container ${fontClass}`} 
+        onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
+      >
+        <div className="form-section left-section">
+          <label htmlFor="title" className={`textboxLabel ${fontClass}`}>
+            Title:
+          </label>
+          <input
+            type="text"
+            id="title"
+            className={`textboxReview ${fontClass}`} 
+            placeholder="Enter Book Title"
+            value={formData.title}
+            onChange={handleChange}
+          />
+
+          {suggestions.length > 0 && (
+            <ul className="suggestions-dropdown">
+              {suggestions.map((book, index) => (
+                <li
+                  key={index}
+                  onClick={() => handleSuggestionClick(book)}
+                  className='suggestion-item' 
+                >
+                  {book.title} -{" "}
+                  {book.author_name ? book.author_name.join(", ") : "Unknown"}
+                </li>
+              ))}
+            </ul>
+          )}
+>>>>>>> Stashed changes
 
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("Form Data Submitted:", formData);
 
+<<<<<<< Updated upstream
         const reviewData = {
             title: formData.reviewTitle,
             rating: parseInt(formData.stars, 10),
@@ -543,6 +671,30 @@ export default function WriteReview() {
                     <Button text="Post Review" />
                 </div>
             </form>
+=======
+          <label htmlFor="author" className={`textboxLabel ${fontClass}`}>
+            Author:
+          </label>
+          <input
+            type="text"
+            id="author"
+            className={`textboxReview ${fontClass}`} 
+            placeholder="Author will appear here..."
+            value={formData.author}
+            onChange={handleChange}
+          />
+
+          <label htmlFor="description" className={`textboxLabel ${fontClass}`}>
+            Book Description:
+          </label>
+          <textarea
+            id="description"
+            className={`textboxReview review-box ${fontClass}`} 
+            placeholder="Book description will appear here..."
+            value={formData.description}
+            readOnly
+          ></textarea>
+>>>>>>> Stashed changes
         </div>
     );
 }

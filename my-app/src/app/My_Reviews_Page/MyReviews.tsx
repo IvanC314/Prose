@@ -8,9 +8,9 @@ import Reviews from "./Reviews";
 import { useAuth } from "../AuthContext";
 
 export default function MyReviews() {
-  const { isLoggedIn, username, logout } = useAuth(); // Access authentication context
-  const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); // State for username dropdown
-  const userDropdownRef = useRef<HTMLDivElement | null>(null); // Ref for dropdown
+  const { isLoggedIn, username, logout } = useAuth(); 
+  const [isUserDropdownOpen, setUserDropdownOpen] = useState(false); 
+  const userDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen(!isUserDropdownOpen);
@@ -21,7 +21,6 @@ export default function MyReviews() {
     window.location.href = "/";
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (

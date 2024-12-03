@@ -52,7 +52,7 @@
 }
 
 .edit-button {
-    background-color: rgb(50, 150, 255); /* Blue for edit */
+    background-color: rgb(50, 150, 255); 
     color: white;
     font-family: Georgia, serif;
 }
@@ -62,7 +62,7 @@
 }
 
 .delete-button {
-    background-color: rgb(255, 50, 50); /* Red for delete */
+    background-color: rgb(255, 50, 50); 
     color: white;
     font-family: Georgia, serif;
 }
@@ -70,7 +70,7 @@
 .delete-button:hover {
     background-color: rgb(209, 29, 29);
 }
-/* Username Button */
+
 .username-button {
     font-family: Georgia, serif;
     background-color: #b92680;
@@ -88,10 +88,10 @@
     background-color: rgb(238, 110, 193);
   }
   
-  /* User Dropdown Menu */
+  
   .user-dropdown-menu {
     position: absolute;
-    top: 60px; /* Aligns with the username button */
+    top: 60px; 
     right: 0;
     background-color: #333;
     color: white;

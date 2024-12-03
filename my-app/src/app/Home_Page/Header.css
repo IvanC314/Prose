@@ -63,7 +63,6 @@ header {
   background-color: #444;
 }
 
-/* Username Button */
 .username-button {
   font-family: Georgia, serif;
   background-color: #b92680;
@@ -81,10 +80,9 @@ header {
   background-color: #b32c98;
 }
 
-/* User Dropdown Menu */
 .user-dropdown-menu {
   position: absolute;
-  top: 60px; /* Aligns with the username button */
+  top: 60px; 
   right: 0;
   background-color: #333;
   color: white;

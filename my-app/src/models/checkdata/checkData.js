@@ -2,16 +2,15 @@ require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const fs = require('fs');
 
-// Debugging: Read and log .env content directly to check if it's being loaded
 console.log('Raw .env file content:');
-console.log(fs.readFileSync('.env', 'utf8'));  // This will print the raw content of the .env file
+console.log(fs.readFileSync('.env', 'utf8'));  
 
 const uri = process.env.MONGODB_URI;
-console.log(`MONGODB_URI: ${uri}`);  // This should show the value from the .env file
+console.log(`MONGODB_URI: ${uri}`);  
 
 if (!uri) {
     console.error('MONGODB_URI is not defined. Check your .env file.');
-    process.exit(1);  // Exit the script if the env variable is not found
+    process.exit(1);  
 }
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });

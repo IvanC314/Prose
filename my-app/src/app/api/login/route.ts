@@ -33,6 +33,10 @@ export async function POST(request: NextRequest) {
             );
         }
 
+<<<<<<< Updated upstream
+=======
+        
+>>>>>>> Stashed changes
         return NextResponse.json(
             { message: "Login successful.", username: user.username, user_id: user._id },
             { status: 200 }

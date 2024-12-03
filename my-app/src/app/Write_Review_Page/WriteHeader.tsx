@@ -37,7 +37,6 @@ export default function WriteHeader() {
                 </div>
             </div>
 
-            {/* Conditional rendering of GIF in the background when exquisiteToggle is true */}
             {exquisiteToggle && (
                 <div className="exquisite-gif">
                     <img src={gif.src} alt="Exquisite Mode" />

@@ -34,10 +34,10 @@ export default function Reviews() {
         };
 
         fetchReviews();
-    }, [user_id]); // Dependency on user_id, re-fetch if user_id changes
+    }, [user_id]); 
 
     const handleDelete = (id: string) => {
-        // Remove the deleted review from the state
+        
         setReviews((prevReviews) => prevReviews.filter((review) => review.id !== id));
     };
 

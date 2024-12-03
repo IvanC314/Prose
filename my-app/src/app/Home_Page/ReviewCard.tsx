@@ -1,4 +1,3 @@
-/* INDIVIDUAL REVIEW CARDS THAT SHOW UP ON THE HOME SCREEN */
 import './ReviewCard.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -6,7 +5,7 @@ import { FaArrowUp } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
 
 interface ReviewCardProps {
-    id: string; // Add the id prop
+    id: string; 
     stars: string;
     reviewTitle: string;
     reviewAuthor: string;
@@ -22,7 +21,7 @@ export default function ReviewCard({ id, stars, reviewTitle, reviewAuthor, bookI
 
     const handleNavigate = () => {
         console.log("Navigating to review...");
-        router.push(`/${id}`); // Navigate to the review page
+        router.push(`/${id}`); 
     };
 
     return (

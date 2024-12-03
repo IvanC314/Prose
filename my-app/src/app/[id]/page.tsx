@@ -26,7 +26,7 @@ const ReviewPage = async ({ params }: { params: { id: string } }) => {
 
         const data = await res.json();
         console.log(data);
-        // Add detailed logging
+        
         console.log('Full response data:', JSON.stringify(data, null, 2));
         console.log('Review data:', data.item);
         console.log('Book data:', data.book);

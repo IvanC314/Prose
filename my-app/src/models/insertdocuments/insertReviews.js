@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Review = require('../reviews');
 
-const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose'; // Hardcoded URI for testing
+const uri = 'mongodb+srv://Farian:1234@reviews.z5ehd.mongodb.net/prose';
 
 const reviews = [
   { title: 'Omg!', rating: 5, desc: 'Absolutely loved it!', upvotes: 3051, downvotes: 27 },
@@ -16,11 +16,9 @@ async function insertReviews() {
     await mongoose.connect(uri);
     console.log('Connected to the database');
 
-    // Clear the reviews collection
     await Review.deleteMany({});
     console.log('Cleared reviews collection');
 
-    // Insert new reviews
     const result = await Review.insertMany(reviews);
     console.log('Reviews inserted:', result);
   } catch (err) {

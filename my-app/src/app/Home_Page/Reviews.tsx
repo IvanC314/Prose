@@ -1,4 +1,3 @@
-// Home_Screen/Reviews.tsx
 'use client';
 
 import './Reviews.css';
@@ -6,19 +5,19 @@ import ReviewCard from './ReviewCard';
 import { useEffect, useState } from 'react';
 
 interface ReviewsProps {
-    reviewsData?: any[]; // Optional prop to pass pre-filtered reviews
+    reviewsData?: any[];
 }
 
 export default function Reviews({ reviewsData }: ReviewsProps) {
     const [reviews, setReviews] = useState<any[]>(reviewsData || []);
 
     useEffect(() => {
-        if (!reviewsData) { // If reviewsData is not passed, fetch reviews
+        if (!reviewsData) { 
             const fetchReviews = async () => {
                 try {
                     const response = await fetch('/api/reviews');
                     const data = await response.json();
-                    console.log(data);  // Log the fetched data to check its structure
+                    console.log(data);  
                     setReviews(data);
                 } catch (error) {
                     console.error("Failed to fetch reviews:", error);
@@ -31,7 +30,6 @@ export default function Reviews({ reviewsData }: ReviewsProps) {
 
     return (
         <div className='review-center'>
-            {/* Only display Featured Reviews on the home page */}
             {!reviewsData && <h2 className="featured-reviews-header">Featured Reviews</h2>}
             <div className='reviews-container'>
                 {reviews.map((review, index) => (
