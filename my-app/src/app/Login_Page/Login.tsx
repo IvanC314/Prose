@@ -23,7 +23,6 @@ export default function Login() {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        // If the user is already logged in and has a valid user_id, redirect to the home page
         if (isLoggedIn && user_id) {
             alert("Logged in. Redirecting to home page.");
             router.push("/");
@@ -34,7 +33,6 @@ export default function Login() {
         e.preventDefault();
         setError("");
 
-        // Validate the credentials with your API
         const response = await fetch("/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -43,13 +41,11 @@ export default function Login() {
 
         const data = await response.json();
 
-<<<<<<< Updated upstream
         if (!response.ok) {
             setError(data.error || "Invalid login credentials.");
             return;
         }
 
-        // Login via next-auth after validation
         const { username: returnedUsername, user_id } = data;
 
         const result = await signIn("credentials", {
@@ -62,22 +58,9 @@ export default function Login() {
             setError("Login failed. Please try again.");
             return;
         }
-=======
-    const { username: returnedUsername, user_id } = data;
 
-    login(returnedUsername, user_id); 
-
-    console.log("Login successful!");
-    console.log("Username:", returnedUsername);
-    console.log("User ID:", user_id);
-
-    router.push("/Home_Page"); 
-  };
->>>>>>> Stashed changes
-
-        // On successful login, update the AuthContext and redirect
         login(returnedUsername, user_id);
-        router.push("/");  // Redirect to home page
+        router.push("/"); 
     };
 
     return (

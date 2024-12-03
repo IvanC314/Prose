@@ -22,12 +22,8 @@
     border-color: #888;
 }
 
-<<<<<<< Updated upstream
 /* Basic styling for header */
 .w-header {
-=======
-header {
->>>>>>> Stashed changes
     margin-top: 20px;
     padding: 20px;
     display: flex;
@@ -35,12 +31,8 @@ header {
     align-items: center;
 }
 
-<<<<<<< Updated upstream
 /* Title container is now inside the flex layout */
 .w-title-container {
-=======
-.title-container {
->>>>>>> Stashed changes
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -53,12 +45,8 @@ header {
     gap: 15px; 
 }
 
-<<<<<<< Updated upstream
 /* Title styling */
 .w-title {
-=======
-.title {
->>>>>>> Stashed changes
     margin: 0;
     font-size: 4rem;
 }

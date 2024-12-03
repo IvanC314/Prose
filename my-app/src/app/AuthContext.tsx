@@ -11,17 +11,12 @@ type AuthContextType = {
   exquisiteToggle: boolean;
   login: (username: string, user_id: string) => void;
   logout: () => void;
-<<<<<<< Updated upstream
   toggleExquisiteMode: () => void;
-=======
-  toggleExquisiteMode: () => void; 
->>>>>>> Stashed changes
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-<<<<<<< Updated upstream
   const { data: session, status } = useSession();  // session hook from next-auth
   const [exquisiteToggle, setExquisiteToggle] = useState<boolean>(false);
 
@@ -38,36 +33,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       sessionStorage.setItem("user_id", "");
     }
   }, [session]); // This effect runs when session data changes
-=======
-  console.log("AuthProvider initialized.");
-
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [username, setUsername] = useState<string | null>(null);
-  const [user_id, setUserId] = useState<string | null>(null);
-  const [exquisiteToggle, setExquisiteToggle] = useState<boolean>(false); 
-
-  useEffect(() => {
-    const storedIsLoggedIn = sessionStorage.getItem("isLoggedIn");
-    const storedUsername = sessionStorage.getItem("username");
-    const storedUserId = sessionStorage.getItem("user_id");
-    const storedExquisiteToggle = sessionStorage.getItem("exquisiteToggle");
-
-    if (storedIsLoggedIn === "true" && storedUsername && storedUserId) {
-      setIsLoggedIn(true);
-      setUsername(storedUsername);
-      setUserId(storedUserId);
-    }
-    setExquisiteToggle(storedExquisiteToggle === "true");
-  }, []);
-
-  useEffect(() => {
-   
-    sessionStorage.setItem("isLoggedIn", isLoggedIn.toString());
-    sessionStorage.setItem("username", username || "");
-    sessionStorage.setItem("user_id", user_id || "");
-    sessionStorage.setItem("exquisiteToggle", exquisiteToggle.toString());
-  }, [isLoggedIn, username, user_id, exquisiteToggle]);
->>>>>>> Stashed changes
 
   const login = (username: string, user_id: string) => {
     sessionStorage.setItem("isLoggedIn", "true");
